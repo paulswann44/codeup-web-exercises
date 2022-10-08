@@ -75,3 +75,9 @@ function isFalse (boolean) {
     return false;
 }
 console.log(isFalse(true));
+
+// Make a function named isTruthy(input), remember that values other than true will behave like true
+function isTruthy (input) {
+
+}
+console.log(isTruthy("input"))
