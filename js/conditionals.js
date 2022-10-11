@@ -221,41 +221,42 @@
 //*********************************************
 //      NESTED IF STATEMENT WITH IF'S
 //*********************************************
-    let confirmNumber = confirm("do you want to submit a number?");
-
-    function nestedIfStatements(confirmNumber) {
-        if (confirmNumber === true) {
-            //By storing the prompt in the if statement, I can reuse it within the alerts          //*********************************************
-            let promptNumber = prompt("What is your number");                             //      NESTED IF STATEMENT WITH IF'S
-            if (promptNumber % 2 !== 0 && promptNumber > 0) {                                     //*********************************************
-                alert("Your number is odd!");
-                //promptNumber will return as a string, so it needs parseFloat
-                alert(parseFloat(promptNumber) + 100);
-                alert("Your number is also POSITIVE.")
-            } else if (promptNumber % 2 === 0 && promptNumber > 0) {
-                alert("Your number is even");
-                //promptNumber will return as a string, so it needs parseFloat
-                alert(parseFloat(promptNumber) + 100);
-                alert("Your number is POSITIVE");
-            } else if (promptNumber % 2 !== 0 && promptNumber < 0) {
-                alert("Your number is odd");
-                //promptNumber will return as a string, so it needs parseFloat
-                alert(parseFloat(promptNumber) + 100);
-                alert("Your number is NEGATIVE");
-            } else if (promptNumber % 2 === 0 && promptNumber < 0) {
-                alert("Your number is odd");
-                //promptNumber will return as a string, so it needs parseFloat
-                alert(parseFloat(promptNumber) + 100);
-                alert("Your number is NEGATIVE");
-            } else {
-                alert("It is not a number or zero");
-            }
-        } else {
-            alert("Thank you for your time!")
-        }
-    }
-
-    nestedIfStatements(confirmNumber);
-
+//     let confirmNumber = confirm("do you want to submit a number?");
+//
+//     function nestedIfStatements(confirmNumber) {
+//         if (confirmNumber === true) {
+//             //By storing the prompt in the if statement, I can reuse it within the alerts
+//             let promptNumber = prompt("What is your number");
+//             if (promptNumber % 2 !== 0 && promptNumber > 0) {
+//                 alert("Your number is odd!");
+//                 //promptNumber will return as a string, so it needs parseFloat
+//                 alert(parseFloat(promptNumber) + 100);
+//                 alert("Your number is also POSITIVE.")
+//             } else if (promptNumber % 2 === 0 && promptNumber > 0) {
+//                 alert("Your number is even");
+//                 //promptNumber will return as a string, so it needs parseFloat
+//                 alert(parseFloat(promptNumber) + 100);
+//                 alert("Your number is POSITIVE");
+//             } else if (promptNumber % 2 !== 0 && promptNumber < 0) {
+//                 alert("Your number is odd");
+//                 //promptNumber will return as a string, so it needs parseFloat
+//                 alert(parseFloat(promptNumber) + 100);
+//                 alert("Your number is NEGATIVE");
+//             } else if (promptNumber % 2 === 0 && promptNumber < 0) {
+//                 alert("Your number is odd");
+//                 //promptNumber will return as a string, so it needs parseFloat
+//                 alert(parseFloat(promptNumber) + 100);
+//                 alert("Your number is NEGATIVE");
+//             } else {
+//                 alert("It is not a number or zero");
+//             }
+//         } else {
+//             alert("Thank you for your time!")
+//         }
+//     }
+//
+//     nestedIfStatements(confirmNumber);
+//
+//
 
 })();
