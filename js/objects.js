@@ -65,8 +65,13 @@
         {name: 'George', amount: 320}
     ];
 
-//
-//
+    shoppers.forEach(shop);
+    function shop (whatever){
+        console.log(whatever.amount)
+    }
+
+
+
 // let checkShoppers = shoppers.forEach(checkShopperAmount);
 //
 // function checkShopperAmount(shopper) {
@@ -99,49 +104,49 @@
  * > console.log(books[0].author.firstName) // "Douglas"
  * > console.log(books[0].author.lastName) // "Adams"
  */
-
-let books = [
-    {
-        title: "The Raven",
-        author: {
-            firstName: "Edger",
-            lastName: "Poe"
-        }
-    },
-    {
-        title: "End of the World is Just the Beginning",
-        author: {
-            firstName: "Peter",
-            lastName: "Zeihan"
-        }
-    },
-    {
-        title: "Guns, Germs, and Steal",
-        author: {
-            firstName: "Jared",
-            lastName: "Diamond"
-        }
-    },
-    {
-        title: "Fairy Tale",
-        author: {
-            firstName: "Stephen",
-            lastName: "King"
-        }
-    },
-    {
-        title: "Green Eggs and Ham",
-        author: {
-            firstName: "Theodor",
-            lastName: "Geisel"
-        }
-    },
-
-
-];
-console.log(books[0].title);
-console.log(books[1].author.firstName);
-console.log(books[2].author.lastName);
+//
+// let books = [
+//     {
+//         title: "The Raven",
+//         author: {
+//             firstName: "Edger",
+//             lastName: "Poe"
+//         }
+//     },
+//     {
+//         title: "End of the World is Just the Beginning",
+//         author: {
+//             firstName: "Peter",
+//             lastName: "Zeihan"
+//         }
+//     },
+//     {
+//         title: "Guns, Germs, and Steal",
+//         author: {
+//             firstName: "Jared",
+//             lastName: "Diamond"
+//         }
+//     },
+//     {
+//         title: "Fairy Tale",
+//         author: {
+//             firstName: "Stephen",
+//             lastName: "King"
+//         }
+//     },
+//     {
+//         title: "Green Eggs and Ham",
+//         author: {
+//             firstName: "Theodor",
+//             lastName: "Geisel"
+//         }
+//     },
+//
+//
+// ];
+// console.log(books[0].title);
+// console.log(books[1].author.firstName);
+// console.log(books[2].author.lastName);
 
     /**
      * TODO:
@@ -168,14 +173,13 @@ console.log(books[2].author.lastName);
      *      ...
      */
 
-
-
-let eBooks = books.forEach(checkBooks);
-
-function checkBooks (book, index) {
-    let bookNumber = index +1;
-    console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
-}
+//
+// let eBooks = books.forEach(checkBooks);
+//
+// function checkBooks (book, index) {
+//     let bookNumber = index +1;
+//     console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
+// }
 
 
 
@@ -198,54 +202,65 @@ function checkBooks (book, index) {
      * - Create a function named `showBookInfo` that accepts a book object and
      *   outputs the information described above.
      *
+     *   I AM HAVING TROUBLE HERE
+     *
      * -STEP 5:
      *   Refactor your loop to use your `showBookInfo` function.
      */
-    function createBook (title, author) {
-        return books = [
-            {
-                title: "The Raven",
-                author: {
-                    firstName: "Edger",
-                    lastName: "Poe"
-                }
-            },
-            {
-                title: "End of the World is Just the Beginning",
-                author: {
-                    firstName: "Peter",
-                    lastName: "Zeihan"
-                }
-            },
-            {
-                title: "Guns, Germs, and Steal",
-                author: {
-                    firstName: "Jared",
-                    lastName: "Diamond"
-                }
-            },
-            {
-                title: "Fairy Tale",
-                author: {
-                    firstName: "Stephen",
-                    lastName: "King"
-                }
-            },
-            {
-                title: "Green Eggs and Ham",
-                author: {
-                    firstName: "Theodor",
-                    lastName: "Geisel"
-                }
-            },
-
-
-        ];
-    }
-function showBookInfo (){
-
-}
-
-
+//     function createBook (title, author) {
+//         return books = [
+//             {
+//                 title: "The Raven",
+//                 author: {
+//                     firstName: "Edger",
+//                     lastName: "Poe"
+//                 }
+//             },
+//             {
+//                 title: "End of the World is Just the Beginning",
+//                 author: {
+//                     firstName: "Peter",
+//                     lastName: "Zeihan"
+//                 }
+//             },
+//             {
+//                 title: "Guns, Germs, and Steal",
+//                 author: {
+//                     firstName: "Jared",
+//                     lastName: "Diamond"
+//                 }
+//             },
+//             {
+//                 title: "Fairy Tale",
+//                 author: {
+//                     firstName: "Stephen",
+//                     lastName: "King"
+//                 }
+//             },
+//             {
+//                 title: "Green Eggs and Ham",
+//                 author: {
+//                     firstName: "Theodor",
+//                     lastName: "Geisel"
+//                 }
+//             },
+//
+//
+//         ];
+//     }
+//
+// //STEP 4
+// function showBookInfo (book){
+//
+// }
+//
+// //STEP 5
+// let eBooks = books.forEach(checkBooks);
+//
+// function checkBooks (book, index) {
+//     let bookNumber = index +1;
+//     console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
+// }
+//
 
 //})();
