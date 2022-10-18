@@ -1,5 +1,6 @@
 (function () {
 //1. EXPODENTIAL WHILE LOOP
+
 // //starting index
 // let i = 1;
 // //will evaluate until false

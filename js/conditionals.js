@@ -159,7 +159,7 @@
 //             return 0 * price;
 //             break;
 //         case 1:
-//             return 1 * price;
+//             return .1 * price;
 //             break;
 //         case 2:
 //              return .25 * price;

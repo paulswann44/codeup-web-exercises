@@ -14,11 +14,11 @@
 
 
         //Method One
-        // let person = new Object();
-        // person.firstName = "Paul";
-        // person.lastName = "Swann";
-        // console.log(person.firstName);
-        // console.log(person.lastName);
+        let person = new Object();
+        person.firstName = "Paul";
+        person.lastName = "Swann";
+        console.log(person.firstName);
+        console.log(person.lastName);
 
         //Method Two
         // let person = {
@@ -65,25 +65,18 @@
         {name: 'George', amount: 320}
     ];
 
-    shoppers.forEach(shop);
-    function shop (whatever){
-        console.log(whatever.amount)
+
+
+    shoppers.forEach(checkShopperAmount);
+
+function checkShopperAmount(shopper) {
+    if (shopper.amount >= 200) {
+        console.log(shopper.name + " needs to pay $" + (shopper.amount * ((1-0.12))));
     }
-
-
-
-// let checkShoppers = shoppers.forEach(checkShopperAmount);
-//
-// function checkShopperAmount(shopper) {
-//     if (shopper.amount >= 200) {
-//         console.log(shopper.name + "needs to pay $" + (shopper.amount * ((1-0.12))));
-//     }
-//     else if (shopper.amount < 200){
-//         console.log(shopper.name + "needs to pay $" + (shopper.amount));
-//     }
-// }
-
-
+    else if (shopper.amount < 200){
+        console.log(shopper.name + " needs to pay $" + (shopper.amount));
+    }
+}
 
 
 
@@ -105,48 +98,48 @@
  * > console.log(books[0].author.lastName) // "Adams"
  */
 //
-// let books = [
-//     {
-//         title: "The Raven",
-//         author: {
-//             firstName: "Edger",
-//             lastName: "Poe"
-//         }
-//     },
-//     {
-//         title: "End of the World is Just the Beginning",
-//         author: {
-//             firstName: "Peter",
-//             lastName: "Zeihan"
-//         }
-//     },
-//     {
-//         title: "Guns, Germs, and Steal",
-//         author: {
-//             firstName: "Jared",
-//             lastName: "Diamond"
-//         }
-//     },
-//     {
-//         title: "Fairy Tale",
-//         author: {
-//             firstName: "Stephen",
-//             lastName: "King"
-//         }
-//     },
-//     {
-//         title: "Green Eggs and Ham",
-//         author: {
-//             firstName: "Theodor",
-//             lastName: "Geisel"
-//         }
-//     },
-//
-//
-// ];
-// console.log(books[0].title);
-// console.log(books[1].author.firstName);
-// console.log(books[2].author.lastName);
+let books = [
+    {
+        title: "The Raven",
+        author: {
+            firstName: "Edger",
+            lastName: "Poe"
+        }
+    },
+    {
+        title: "End of the World is Just the Beginning",
+        author: {
+            firstName: "Peter",
+            lastName: "Zeihan"
+        }
+    },
+    {
+        title: "Guns, Germs, and Steal",
+        author: {
+            firstName: "Jared",
+            lastName: "Diamond"
+        }
+    },
+    {
+        title: "Fairy Tale",
+        author: {
+            firstName: "Stephen",
+            lastName: "King"
+        }
+    },
+    {
+        title: "Green Eggs and Ham",
+        author: {
+            firstName: "Theodor",
+            lastName: "Geisel"
+        }
+    },
+
+
+];
+console.log(books[0].title);
+console.log(books[1].author.firstName);
+console.log(books[2].author.lastName);
 
     /**
      * TODO:
@@ -173,13 +166,13 @@
      *      ...
      */
 
-//
-// let eBooks = books.forEach(checkBooks);
-//
-// function checkBooks (book, index) {
-//     let bookNumber = index +1;
-//     console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
-// }
+
+let eBooks = books.forEach(checkBooks);
+
+function checkBooks (book, index) {
+    let bookNumber = index +1;
+    console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
+}
 
 
 

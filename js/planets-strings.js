@@ -31,4 +31,16 @@
     let planetaryList = "<ul>" + "<li>" + planetsArray.join("</li><li>" ) + "</li>" + "</ul>";
     console.log(planetaryList);
 
+    let newPlanetArr =[];
+    planetArray.forEach(function(planet){
+        console.log("<li>${planet}$</li>");
+        newPlanetArr.push("<li>${planet}$</li>");
+
+    });
+    console.log(newPlanetArr);
+    newPlanetArr.unshift('<ul>');
+    newPlanetArr.push("</ul>");
+    let str = newPlanetArr.join();
+    console.log(str)
+
 //})();
