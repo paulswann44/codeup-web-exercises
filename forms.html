@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register With Us</title>
+</head>
+<body>
+<main>
+    <section>
+        <form method="POST" action="https://request-inspector.glitch.me/">
+            <!------------------------------Email--------------------------------------->
+            <label for="email">Email:</label>
+                <input name= "email" id="email" type="email" placeholder="Example@domain.com">
+
+
+
+            <!------------------------------Password--------------------------------------->
+            <label for="password"> Password:</label>
+                <input name="password" id="password" type="password" placeholder="Enter Password"> <br>
+            <br>
+
+            <!------------------------------Textarea------------------------------------>
+            <label for="bio"> Enter Message:</label><br>
+            <textarea name="message" cols="20" rows="10" id="bio" name="bio" placeholder="Enter your bio here:"></textarea>
+            <br>
+            <br>
+
+            <!------------------------------Radio Buttons------------------------------->
+            <label>How did you hear about us? </label> <br>
+            <label for="billboard"><input id="billboard" type="radio" value="billboard" name="bill"> Billboard
+            </label><br>
+            <label for="radio"><input id="radio" type="radio" value="radio advertisement" name="rad"> Radio
+                Advertisement</label><br>
+            <label for="internet"><input id="internet" type="radio" value="internet" name="int"> Internet Advertisement</label><br>
+            <label for="other"><input id="other" type="radio" value="other" name="oth"> Other</label> <br>
+            <br>
+            <!------------------------------Drop Down------------------------------->
+            <label>What web browser are you using? </label> <br>
+            <select Name="web_browser" multiple>
+                <option value="chrome">Chrome</option>
+                <option value="firefox">Firefox</option>
+                <option value="explorer" disabled>Internet Explorer</option>
+                <option value="safari">Safari</option>
+            </select> <br><br>
+
+
+            <button type="submit">Submit</button>
+
+
+        </form>
+    </section>
+</main>
+</body>
+</html>
