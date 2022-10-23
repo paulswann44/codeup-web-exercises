@@ -202,65 +202,21 @@
      * - Create a function named `showBookInfo` that accepts a book object and
      *   outputs the information described above.
      *
-     *   I AM HAVING TROUBLE HERE
      *
      * -STEP 5:
      *   Refactor your loop to use your `showBookInfo` function.
      */
-//     function createBook (title, author) {
-//         return books = [
-//             {
-//                 title: "The Raven",
-//                 author: {
-//                     firstName: "Edger",
-//                     lastName: "Poe"
-//                 }
-//             },
-//             {
-//                 title: "End of the World is Just the Beginning",
-//                 author: {
-//                     firstName: "Peter",
-//                     lastName: "Zeihan"
-//                 }
-//             },
-//             {
-//                 title: "Guns, Germs, and Steal",
-//                 author: {
-//                     firstName: "Jared",
-//                     lastName: "Diamond"
-//                 }
-//             },
-//             {
-//                 title: "Fairy Tale",
-//                 author: {
-//                     firstName: "Stephen",
-//                     lastName: "King"
-//                 }
-//             },
-//             {
-//                 title: "Green Eggs and Ham",
-//                 author: {
-//                     firstName: "Theodor",
-//                     lastName: "Geisel"
-//                 }
-//             },
-//
-//
-//         ];
-//     }
-//
-// //STEP 4
-// function showBookInfo (book){
-//
-// }
-//
-// //STEP 5
-// let eBooks = books.forEach(checkBooks);
-//
-// function checkBooks (book, index) {
-//     let bookNumber = index +1;
-//     console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
-// }
-//
+
+    // function createBook(title, author){
+    //     author = author.split(" ");
+    //     let book = {
+    //         name: title,
+    //         author: {
+    //             firstName: author[0],
+    //             lastName: author[1]
+    //         }
+    //     }
+    //     return book;
+    // }
 
 //})();
