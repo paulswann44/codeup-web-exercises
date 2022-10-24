@@ -1,3 +1,59 @@
+/*step 3*/
 .fancy-header{
     color: purple;
+    text-align: center;
+
+}
+/*step 4*/
+h2 {
+    color: crimson;
+}
+/*step 5 having difficulty with background image-->*/
+body{
+    background-image: url("img/pikachu.png");
+    background-position: center;
+    background-size: auto;
+    background-color: peachpuff;
+    background-repeat: no-repeat;
+    /*step 7*/
+    font-family: 'Fasthand', cursive;
+
+
+    /* having difficulty with background image*/
+
+}
+/*step 6*/
+.circle{
+    list-style-type:circle;
+}
+
+.square {
+    list-style-type: square;
+}
+
+.roman {
+    list-style-type: lower-roman;
+}
+
+/*step 8*/
+
+td, tr {
+    padding: 20px;
+
+}
+/*step 9*/
+a:link {
+    color:darkblue;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover{
+    color: darkblue;
+}
+
+a:active {
+    color: red;
 }
