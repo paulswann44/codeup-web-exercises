@@ -52,15 +52,8 @@ function average (array) {
 // inBetween(0, 1, 0.5) returns true
 
 //condition one
-// function inBetween (min, max, num) {
-//     //condition two
-//     if (num < max && min > num) {
-//         return true
-//     } else {
-//         return false
-//     }
-//
-// }
+
+
 
 
 
