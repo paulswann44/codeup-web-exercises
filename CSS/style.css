@@ -1,47 +1,58 @@
-/*step 3*/
+
 .fancy-header{
     color: purple;
+    text-decoration: underline;
     text-align: center;
 
 }
-/*step 4*/
+
 h2 {
-    color: crimson;
+    color: purple;
+    text-decoration: underline;
 }
-/*step 5 having difficulty with background image-->*/
-body{
-    background-image: url("img/pikachu.png");
+
+html {
+    background-color: peachpuff;
+
+    /*background-image: url("/Users/paulswann/IdeaProjects/codeup-web-exercises/img/pikachu.png");*/
+    background-image: url("https://media-be.chewy.com/wp-content/uploads/2018/02/26125022/puppy-dog-eyes-1024x548.jpg");
     background-position: center;
-    background-size: auto;
+    background-size: 100%;
     background-color: peachpuff;
     background-repeat: no-repeat;
     /*step 7*/
     font-family: 'Fasthand', cursive;
-
-
-    /* having difficulty with background image*/
-
-}
-/*step 6*/
-.circle{
-    list-style-type:circle;
 }
 
-.square {
+ul{
     list-style-type: square;
+
 }
 
-.roman {
-    list-style-type: lower-roman;
-}
 
-/*step 8*/
 
-td, tr {
+
+/*.circle{*/
+/*    list-style-type:circle;*/
+/*}*/
+
+/*.square {*/
+/*    list-style-type: square;*/
+/*}*/
+
+/*.roman {*/
+/*    list-style-type: lower-roman;*/
+/*}*/
+
+
+
+table {
+    font-size: 25px;
     padding: 20px;
 
+
 }
-/*step 9*/
+
 a:link {
     color:darkblue;
 }
