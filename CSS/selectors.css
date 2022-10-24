@@ -11,6 +11,7 @@
 #container h1.fancy-header{
     color: blue;
     text-decoration: underline;
+    margin-bottom:100px;
 }
 
 /* selector for all "em" elements */
@@ -29,4 +30,16 @@ em {
 
 .article>a {
     float:right;
+}
+
+p{
+    /*This will affect the CONTENT AREA.
+adjusting the content area will not change the margin or padding area*/
+    width: 600px;
+    height: 100px;
+    padding: 50px;
+    /*border surrounding content and H and W adjusts with it*/
+    border: black dashed 5px;
+    margin: 25px;
+
 }
