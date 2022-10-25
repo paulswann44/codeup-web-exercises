@@ -1,3 +1,4 @@
+(function (){
 // Warm-Up:
 
 // (1) Create a function named "typePrinter" that accepts an array as an input
@@ -24,22 +25,22 @@
 // (4) returns the average.
 // (4) If any of the elements in the array are non-numeric, the function should return false.
 
-function average (array) {
-    let count = 0;
-    //break the array
-    for (let i = 0;  i < array.length; i++) {
-        //checks IF numberic values
-        //condition two
-        if(!isNaN(parseFloat(array[i]))) {
-            //counts the numberic numbers and strings
-            return count += parseFloat(array[i]);
-        } else {
-            return false;
-        }
-        //return count/array.length
-    }
-
-}
+// function average (array) {
+//     let count = 0;
+//     //break the array
+//     for (let i = 0;  i < array.length; i++) {
+//         //checks IF numberic values
+//         //condition two
+//         if(!isNaN(parseFloat(array[i]))) {
+//             //counts the numberic numbers and strings
+//             return count += parseFloat(array[i]);
+//         } else {
+//             return false;
+//         }
+//         //return count/array.length
+//     }
+//
+// }
 
 
 
@@ -69,8 +70,8 @@ function average (array) {
 //
 // }
 
-console.log(inBetween(5, 10, 7));
-console.log(inBetween(5, 10, 10));
+// console.log(inBetween(5, 10, 7));
+// console.log(inBetween(5, 10, 10));
 
 
 
@@ -87,9 +88,61 @@ console.log(inBetween(5, 10, 10));
 // }
 
 
-console.log(average(["6", 5, 3, 2, 9]));                    // returns 5
-console.log(average([true, 6, 9, 3, 10]));                // returns false
-console.log(average([{name: "Codey the Duck"}, 10, 3, false])); // returns false" +
-console.log(average([1, 2, 3, 4, 5]));                     // returns 3
+// console.log(average(["6", 5, 3, 2, 9]));                    // returns 5
+// console.log(average([true, 6, 9, 3, 10]));                // returns false
+// console.log(average([{name: "Codey the Duck"}, 10, 3, false])); // returns false" +
+// console.log(average([1, 2, 3, 4, 5]));                     // returns 3
 // console.log(average(["5.5", "five", 3, 6, 7]));               // returns false
+
+
+
+// Create a function named "filterNegativity" that accepts an array of numbers, and returns an array with only positive numbers.
+//
+//     Ex: filterNegativity([5, -6, 2, 0, -5, -13]) // returns [5, 2, 0,]
+//
+
+// function filterNegativity (array) {
+//     //this needs improvement
+//     let posArr =[];
+//     for (let i = 0; i < array.length; i++) {
+//         if (array[i] >= 0){
+//             //this needs improvement
+//             posArr.push(array[i])
+//         }
+//     }
+//     return posArr
+// }
+//     console.log(filterNegativity([5, -6, 2, 0, -5, -13])); // returns [5, 2, 0,]
+
+const filterNegativity = (arr) => {
+    let positiveArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i] >= 0) {
+            positiveArr.push(arr[i]);
+        }
+    }
+    return positiveArr;
+}
+
+console.log(filterNegativity([5, -6, 2, 0, -5, -13]));
+
+
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
