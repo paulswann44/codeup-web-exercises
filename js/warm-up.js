@@ -101,30 +101,35 @@
 //     Ex: filterNegativity([5, -6, 2, 0, -5, -13]) // returns [5, 2, 0,]
 //
 
-// function filterNegativity (array) {
-//     //this needs improvement
-//     let posArr =[];
-//     for (let i = 0; i < array.length; i++) {
-//         if (array[i] >= 0){
-//             //this needs improvement
-//             posArr.push(array[i])
+// const filterNegativity = (array) => {
+//     let positiveArray = [];
+//     let negativeArray = [];
+//     for(let i = 0; i <array.length; i++) {
+//         if(array[i] >= 0) {
+//             positiveArray.push(array[i]);
+//         }else if (array[i] < 0){
+//             negativeArray.push(array[i]);
 //         }
 //     }
-//     return posArr
+//     return positiveArray
+//     //return negativeArray
 // }
 //     console.log(filterNegativity([5, -6, 2, 0, -5, -13])); // returns [5, 2, 0,]
 
-const filterNegativity = (arr) => {
-    let positiveArr = [];
-    for (let i = 0; i < arr.length; i++) {
-        if(arr[i] >= 0) {
-            positiveArr.push(arr[i]);
-        }
-    }
-    return positiveArr;
-}
 
-console.log(filterNegativity([5, -6, 2, 0, -5, -13]));
+
+
+// const filterNegativity = (arr) => {
+//     let positiveArr = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         if(arr[i] >= 0) {
+//             positiveArr.push(arr[i]);
+//         }
+//     }
+//     return positiveArr;
+// }
+
+//console.log(filterNegativity([5, -6, 2, 0, -5, -13]));
 
 
 })();

@@ -1,0 +1,63 @@
+html, body {
+    box-sizing: border-box;
+    font-size: 60px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+
+}
+
+nav {
+    background-color: rgb(193,193,193);
+    height: 4.25em;
+}
+
+.logo{
+    font-size: 3em;
+    padding: .2em;
+    text-align: center;
+}
+
+
+a:hover {
+    color: blue;
+}
+
+
+
+.divGroupOne {
+    display: flex;
+    justify-content: flex-start;
+    text-align: start;
+
+
+}
+
+.divGroupTwo {
+    display: flex;
+    justify-content: flex-end;
+    text-align: end;
+    width: 600px;
+
+
+}
+
+.divcenter{
+    justify-content: center;
+}
+
+.header ul {
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.navi{
+    margin-right: 30px;
+}
