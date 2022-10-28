@@ -1,63 +1,58 @@
-html, body {
-    box-sizing: border-box;
-    font-size: 60px;
+html, body{
     font-family: 'Montserrat', sans-serif;
-}
+    box-sizing: border-box;
 
-nav ul{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
 
-}
-
-nav {
-    background-color: rgb(193,193,193);
-    height: 4.25em;
-}
-
-.logo{
-    font-size: 3em;
-    padding: .2em;
-    text-align: center;
 }
 
 
 a:hover {
     color: blue;
+    display: inline-block;
 }
 
-
-
-.divGroupOne {
+.container{
     display: flex;
+    /*This centered the listed items in the center of the div*/
+    align-items: center;
+    list-style: none;
+    /*Removing the padding brings the list items closer to the sides of their container*/
+    padding: 0;
+    background-color: rgb(193,193,193);
+
+
+}
+
+#logo-item{
+    font-size: 3em;
+    padding: .2em;
+}
+
+.group-one{
+    /*This makes "Article" to "Jobs" vertical*/
+    display: flex;
+    /*Had no effect, but allows it to shift vertically to the left of container*/
     justify-content: flex-start;
-    text-align: start;
-
+    /*Since there is 3 divs w/in the navbar, flex-grow */
+    flex-grow: 1;
 
 }
 
-.divGroupTwo {
+
+.group-two {
+    /*This makes "Follow us" to "circle user" vertical*/
     display: flex;
+    /*Had no effect, but allows it to shift vertically to the right of container*/
     justify-content: flex-end;
-    text-align: end;
-    width: 600px;
+    /*Since there is 3 divs w/in the navbar, flex-grow */
+    flex-grow: 1;
 
 
 }
 
-.divcenter{
-    justify-content: center;
+.nav-tree {
+    margin: .5em;
+    /*I could not see so I increased the size*/
+    font-size: 20px;
 }
 
-.header ul {
-    display: flex;
-    justify-content: space-between;
-
-
-}
-
-.navi{
-    margin-right: 30px;
-}
