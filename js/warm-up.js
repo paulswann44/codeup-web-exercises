@@ -4,6 +4,8 @@
 // (1) Create a function named "typePrinter" that accepts an array as an input
 // (2) and logs the data type of each element to the console.
 
+
+
 //Condition One: create a function
 
 
@@ -25,19 +27,42 @@
 // (4) returns the average.
 // (4) If any of the elements in the array are non-numeric, the function should return false.
 
+// let array = [1,2,12,4,5]
+
+// function average(array) {
+//     let count = 0;
+//     for(let i = 0; i < array.length; i++){
+//         if (!isNaN(parseFloat(array[i]))){
+//             return count/ parseFloat(array[i])
+//         }else {
+//             return false
+//         }
+//     }
+// }
+//
+// console.log(average(array))
+
+
+
+
+
+
+
+
+
+
+
+
+
 // function average (array) {
 //     let count = 0;
 //     //break the array
 //     for (let i = 0;  i < array.length; i++) {
-//         //checks IF numberic values
-//         //condition two
 //         if(!isNaN(parseFloat(array[i]))) {
-//             //counts the numberic numbers and strings
 //             return count += parseFloat(array[i]);
 //         } else {
 //             return false;
 //         }
-//         //return count/array.length
 //     }
 //
 // }
@@ -53,7 +78,6 @@
 // inBetween(0, 1, 0.5) returns true
 
 //condition one
-
 
 
 
@@ -100,6 +124,21 @@
 //
 //     Ex: filterNegativity([5, -6, 2, 0, -5, -13]) // returns [5, 2, 0,]
 //
+
+function filterNegativity (array) {
+    let negArray = [];
+    for(let i = 0; i < array.length; i++) {
+        if(array[i] >= 0){
+            return negArray.push(array[i]);
+        }else{
+            return false
+        }
+    }
+}
+
+
+    console.log(filterNegativity([5, -6, 2, 0, -5, -13])); // returns [5, 2, 0,]
+
 
 // const filterNegativity = (array) => {
 //     let positiveArray = [];
