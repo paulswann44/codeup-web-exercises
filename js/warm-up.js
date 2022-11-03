@@ -29,30 +29,6 @@
 
 // let array = [1,2,12,4,5]
 
-// function average(array) {
-//     let count = 0;
-//     for(let i = 0; i < array.length; i++){
-//         if (!isNaN(parseFloat(array[i]))){
-//             return count/ parseFloat(array[i])
-//         }else {
-//             return false
-//         }
-//     }
-// }
-//
-// console.log(average(array))
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function average (array) {
 //     let count = 0;
