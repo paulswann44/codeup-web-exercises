@@ -1,4 +1,4 @@
-(function(){
+(function () {
     "use strict";
 
     /**
@@ -14,19 +14,19 @@
 
 
         //Method One
-        let person = new Object();
-        person.firstName = "Paul";
-        person.lastName = "Swann";
-        console.log(person.firstName);
-        console.log(person.lastName);
+    let person = new Object();
+    person.firstName = "Paul";
+    person.lastName = "Swann";
+    console.log(person.firstName);
+    console.log(person.lastName);
 
-        //Method Two
-        // let person = {
-        //         firstName: "Paul",
-        //         lastName: "Swann"
-        //     };
-        // console.log(person.firstName)
-        // console.log(person.lastName)
+    //Method Two
+    // let person = {
+    //         firstName: "Paul",
+    //         lastName: "Swann"
+    //     };
+    // console.log(person.firstName)
+    // console.log(person.lastName)
 
 
     /**
@@ -40,7 +40,7 @@
      */
 
 
-    person.sayHello =   `Hello from ${person.firstName} ${person.lastName}`;
+    person.sayHello = `Hello from ${person.firstName} ${person.lastName}`;
     console.log(person.sayHello);
 
     /** TODO:
@@ -84,7 +84,6 @@
 // *********************************
 
 
-
 // shoppers.forEach(checkShopperAmount);
 //
 // function checkShopperAmount(shopper) {
@@ -97,69 +96,66 @@
 // }
 
 
+    /** TODO:
+     * Step 1: Create an array of objects that represent books and store it in a
+     * variable named `books`.
+     *
+     * Step 2: Each object should have a title and an author property.
+     *
+     * Step 3: The author property should be an object with properties
+     * `firstName` and `lastName`.
+     *
+     * Step 4: Be creative and add at least 5 books to the
+     * array
+     *
+     * Example:
+     * > console.log(books[0].title) // "The Salmon of Doubt"
+     * > console.log(books[0].author.firstName) // "Douglas"
+     * > console.log(books[0].author.lastName) // "Adams"
+     */
+
+    let books = [
+        {
+            title: "The Raven",
+            author: {
+                firstName: "Edger",
+                lastName: "Poe"
+            }
+        },
+        {
+            title: "End of the World is Just the Beginning",
+            author: {
+                firstName: "Peter",
+                lastName: "Zeihan"
+            }
+        },
+        {
+            title: "Guns, Germs, and Steal",
+            author: {
+                firstName: "Jared",
+                lastName: "Diamond"
+            }
+        },
+        {
+            title: "Fairy Tale",
+            author: {
+                firstName: "Stephen",
+                lastName: "King"
+            }
+        },
+        {
+            title: "Green Eggs and Ham",
+            author: {
+                firstName: "Theodor",
+                lastName: "Geisel"
+            }
+        },
 
 
-
-/** TODO:
- * Step 1: Create an array of objects that represent books and store it in a
- * variable named `books`.
- *
- * Step 2: Each object should have a title and an author property.
- *
- * Step 3: The author property should be an object with properties
- * `firstName` and `lastName`.
- *
- * Step 4: Be creative and add at least 5 books to the
- * array
- *
- * Example:
- * > console.log(books[0].title) // "The Salmon of Doubt"
- * > console.log(books[0].author.firstName) // "Douglas"
- * > console.log(books[0].author.lastName) // "Adams"
- */
-
-let books = [
-    {
-        title: "The Raven",
-        author: {
-            firstName: "Edger",
-            lastName: "Poe"
-        }
-    },
-    {
-        title: "End of the World is Just the Beginning",
-        author: {
-            firstName: "Peter",
-            lastName: "Zeihan"
-        }
-    },
-    {
-        title: "Guns, Germs, and Steal",
-        author: {
-            firstName: "Jared",
-            lastName: "Diamond"
-        }
-    },
-    {
-        title: "Fairy Tale",
-        author: {
-            firstName: "Stephen",
-            lastName: "King"
-        }
-    },
-    {
-        title: "Green Eggs and Ham",
-        author: {
-            firstName: "Theodor",
-            lastName: "Geisel"
-        }
-    },
-
-
-];
-console.log(books[0].title);
-console.log(books[1].author.firstName);
-console.log(books[2].author.lastName);
+    ];
+    console.log(books[0].title);
+    console.log(books[1].author.firstName);
+    console.log(books[2].author.lastName);
 
     /**
      * TODO:
@@ -197,13 +193,16 @@ console.log(books[2].author.lastName);
 //     console.log("Book number: " + bookNumber + '\n' + "Title: " + book.title + '\n' + "Author: " + book.author.firstName + " " + book.author.lastName);
 // }
 
+
 // *********************************
 //       -**FOR LOOP METHOD**-
 // *********************************
-    for(let i = 0; i <books.length; i++ ) {
-        console.log(`Book: ${books.indexOf(books[i])+1} \n Title: ${books[i].title} \n Author: ${books[i].author.firstName} ${books[i].author.lastName}`)
+    for (let i = 0; i < books.length; i++) {
+        console.log(`Book: ${books.indexOf(books[i]) + 1} \n Title: ${books[i].title} \n Author: ${books[i].author.firstName} ${books[i].author.lastName}`)
 
     }
+
+
     /**
 
      * Bonus:
@@ -247,7 +246,6 @@ console.log(books[2].author.lastName);
 // console.log(books)
 //
 // function showBookInfo(book){
-//     //from the books object-array, count each book
 //     console.log(`Book # ${books.indexOf(book) + 1}`);
 //     console.log(`Title: ${book.title}`);
 //     console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
