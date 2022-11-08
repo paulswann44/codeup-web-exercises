@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Defuse the BOM</title>
+</head>
+<body>
+
+<h2 id="message">This BOM will self-destruct in <span id="timer">5</span> seconds...</h2>
+<button id="defuser">Defuse the BOM</button>
+
+<script>
+    (function () {
+        "use strict";
+
+        var detonationTimer = 5;
+
+        // TODO: This function needs to be called once every second
+        // STEP 1: let myInterval = setInterval( calling a function, milliseconds in terms of 1,000's)
+        //Explaination: The timer will countdown for every 1 second (1000 milliseconds).
+        //setInterval will repeat multiple times..
+        //Behaves more like a loop
+         let myInterval = setInterval(updateTimer, 1000);
+
+        //Explaination: setTimeout had no reaction with initiating the countdown, b/c it executed only once.
+        // setTimeout() acts more like a "delay" before
+        //  const myInterval = setTimeout(updateTimer, 1000);
+
+
+        function updateTimer() {
+            if (detonationTimer == 0) {
+                alert('EXTERMINATE!');
+                document.body.innerHTML = '';
+            } else if (detonationTimer > 0) {
+                document.getElementById('timer').innerHTML = detonationTimer;
+            }
+            detonationTimer--;
+        }
+
+
+        // TODO: When this function runs, it needs to
+
+
+   {
+
+
+            //NOTE: both clearInterval() and clearTimeout() defuses the bom.  they are interchangable.
+            // clearInterval(myInterval);
+            // clearTimeout(myInterval);
+
+
+        }
+
+
+        // Don't modify anything below this line!
+        //
+        // This causes the defuseTheBOM() function to be called
+        // when the "defuser" button is clicked.
+        // We will learn about events in the DOM lessons
+        var defuser = document.getElementById('defuser');
+        defuser.addEventListener('click', defuseTheBOM);
+    })();
+</script>
+</body>
+</html>
+
+<!--REF/SOURCE:
+https://www.w3schools.com/jsref/met_win_setinterval.asp
+-->
