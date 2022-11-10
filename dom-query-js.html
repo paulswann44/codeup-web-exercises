@@ -12,10 +12,12 @@
     <li data-dbid="2">Item 2</li>
     <li data-dbid="3">Item 3</li>
     <li data-dbid="4">Item 4</li>
-    <li data-dbid="5">Item 5</li>
+    <li data-dbid="5">Item 5</li><br>
+
+
 </ul>
 <h2 id="sub-header">Hello Again.</h2>
-<p class="sub-paragraph">
+<p class="sub-paragraph" id="subparagraph">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
     ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -24,8 +26,26 @@
     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
+<!--Exercises-->
+<!--Please follow the instructions below.-->
+
+<!--1.-->
+<!--Open the HTML file named dom-query-js.html that you created in the last lesson.-->
+
+<!--2. -->
+<!--Add 4 buttons to the page. Attach click event listeners to each of the buttons and have the handlers perform the modifications that were automatically taking place. For example, the first button should set inner html of mainHeader to "JavaScript is Cool".-->
+<button type= button id="btn-1">Change header</button><br>
+<button type= button  id="btn-2">Make subheader blue</button><br>
+<button type= button  id="btn-3">List Item Button</button><br>
+<button type= button  id="subparagraphBtn">Change Subparagraph Text</button><br>
+
+<!--View the results in your browser to test for the expected output.-->
+
+<!--4.-->
+<!--Finally, save your work, commit the changes to your git repository, and push to GitHub.-->
 
 <script>
+
     (function () {
         "use strict";
         // TODO: Uncomment next line and get the main header element by id
@@ -33,20 +53,24 @@
 
 
         // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = "JavaScript is Cool";
+        document.getElementById('btn-1').addEventListener("click", function(){
+            mainHeader.innerHTML = "JavaScript is Cool";
+        })
 
         // TODO: Uncomment the next line and get the sub header element by id
         var subHeader = document.getElementById("sub-header");
-        console.log(subHeader);
+        //console.log(subHeader);
 
         // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = "blue";
+        document.getElementById("btn-2").addEventListener("click", function(){
+            subHeader.style.color = "blue";
+        });
 
         // TODO: Uncomment the next line and get all list items
         //Both options are viable
         // var listItems = document.querySelectorAll("li");
         var listItems = document.getElementsByTagName("li");
-        console.log(listItems)
+        //console.log(listItems)
 
         // TODO: Set text color on every other list item to grey
 
@@ -67,24 +91,61 @@
         // TODO: Set text color of li with dbid = 1 to blue
 
         //Method 1:
-        // listItems[0].style.color = "blue"
+        listItems[0].style.color = "blue"
 
         //Method 2:
-        if (listItems[i].getAttribute("data-dbid") === "1") {
-            listItems[i].style.color = "blue";
-        }
+        // if (listItems[i].getAttribute("data-dbid") === "1") {
+        //     listItems[i].style.color = "blue";
+        // }
 
 
         // TODO: Uncomment the next line and get all elements with class name sub-paragraph
 
-        var subParagraphs = document.getElementsByClassName("sub-paragraph")
 
+
+
+        let subParagraphButton = document.getElementById('subparagraphBtn');
+        subParagraphButton.addEventListener('click', function (){
+            subParagraphs[0].innerHTML = "Mission Accomplished!";
+        })
 
         // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerHTML = "Mission Accomplished!";
+        // subParagraphs[0].innerHTML = "Mission Accomplished!";
+
+        //EXTRA BU
+
+
+
+
+
+
+
+        //+++++++++++++++++++++++++++++++++++BUTTON LISTENERS++++++++++++++++++++++++++
+
+
+
+        // //THIS IS DARK MODE
+        // //selected button by ID
+        // let btn = document.getElementById("");
+        // //button has click event attached
+        // btn.addEventListener("mouseover", function(){
+        //     console.log("event listener fired off");
+
+        //     let html = document.getElementById('htmlFile');
+        //     html.style['background']= "black";
+        //     html.style.color = "white"
+        // })
+
+
+
+
+
+
+
 
 
     })();
 </script>
+
 </body>
 </html>

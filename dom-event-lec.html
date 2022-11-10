@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlFile">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 id="hader">COW RATING WEBSITE! Mootacular</h1>
+<div>
+    <img id="cow1" src="img/minikyu.png" alt="cow"> <br>
+    <button id="cow1Win">Like</button>
+    <button id="cow1Loss">Dislike</button>
+</div>
+<h2>You like me</h2>
+<h2>You like me NOT</h2>
+
+
+<div>
+    <img id="cow2" src="img/mimikyu2.jpeg" alt="cow"><br>
+
+    <button id="cow2Win">like</button>
+    <button id="cow2Loss">Dislike</button>
+</div>
+
+<h2>You like me</h2>
+<h2>You like me NOT</h2>
+<button id="dark-mode"> Dark Mode</button>
+
+
+<script>
+    let h2 = document.getElementById("")
+
+    let likeCow1 = document.getElementById("cow1Like");
+    let likeCow2 = document.getElementById("cow2Like");
+    let dislikeCow1 = document.getElementById("cow1Like");
+    let dislikeCow2 = document.getElementById("cow2Like");
+
+    likeCow1.addEventListener("click", function () {
+        let =
+        cow1Message = document.getElementById('cow1Win');
+        cow1Message.style.display = 'block';
+
+
+    })
+
+    //THIS IS DARK MODE
+    selected button by ID
+    let btn = document.getElementById("btn-1");
+    //button has click event attached
+    btn.addEventListener("mouseover", function(){
+        console.log("event listener fired off");
+        let html = document.getElementById('htmlFile');
+        html.style['background']= "black";
+        html.style.color = "white"
+    })
+
+
+</script>
+
+
+</body>
+</html>
