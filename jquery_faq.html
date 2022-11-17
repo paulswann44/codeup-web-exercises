@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery Attributes Exercise</title>
+</head>
+<body>
+
+
+<style>
+.invisable{
+    visibility: hidden;
+}
+not-invisable{
+    visibility: visible;
+}
+
+
+</style>
+
+<h2>10-Facts about National Parks:</h2>
+<a href="#" class="toggle-link">Toggle Description</a>
+
+<dl>
+    <dt>Sequoia National Park</dt>
+    <dd class="invisable">Is home to the largest tree in the world</dd>
+
+    <dt>Mammoth Cave National Park</dt>
+    <dd class="invisable">Has the longest known cave system in the world.</dd>
+
+    <dt>Great Sand Dunes National Park</dt>
+    <dd class="invisable">You can sled down the tallest sand dune in North America</dd>
+
+    <dt>Yellowstone</dt>
+    <dd class="invisable">Has its own flower.</dd>
+
+    <dt>Hot Springs National Park</dt>
+    <dd class="invisable">Started out as a spa.</dd>
+
+    <dt>Dry Tortugas</dt>
+    <dd class="invisable">Is the most remote national park.</dd>
+
+    <dt>Mesa Verde National Park</dt>
+    <dd class="invisable">Protects 5000 archaeological sites.</dd>
+
+    <dt>Great Smoky Mountains</dt>
+    <dd class="invisable">The most visited park</dd>
+
+    <dt>Yellowstone</dt>
+    <dd class="invisable">Has a supervolcano</dd>
+
+
+</dl>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    "use strict";
+
+    //  $(document).ready(function() {
+    //
+    //     $('dd').click(function(event) {
+    //         event.preventDefault();
+    //
+    //         $(this).toggleClass('invisable');
+    //     });
+    // });
+
+    //IN-CLASS SOLUTION
+    $('.toggle-link').click(function(event){
+        event.preventDefault();
+        $('dd').toggleClass('invisable')
+
+    });
+    $('dt').click(function(event){
+        event.preventDefault();
+        $(this).css('background', 'yellow')
+
+    })
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
