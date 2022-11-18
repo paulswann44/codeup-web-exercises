@@ -52,20 +52,35 @@ not-invisable{
 
 </dl>
 
+<h3>Acadia</h3>
+<ul class="park">
+    <li>The Park was Named After a Region of Greece</li>
+    <li>Acadia Was Founded by Private Citizens</li>
+    <li>The Park Is Home to More Than 1,000 Plant Species</li>
+    <li>It is in Maine</li>
+</ul>
+<h3 >Biscayne</h3>
+<ul class="park">
+    <li>95% of the park’s nearly 173,000 acres are underwater. Other than the Convoy Point area near the visitor center, a boat is needed to access the park.</li>
+    <li>The largest island in the park is Elliott Key, which is actually the first of the “true” Florida Keys.</li>
+    <li>Biscayne Bay is generally a very shallow sea, with an average depth of only 10 feet.</li>
+    <li>It is in Flordia</li>
+</ul>
+<h3 >Carlsbad Caverns</h3>
+<ul class="park">
+    <li>Carlsbad Cavern is one of over 300 limestone caves in a fossil reef laid down by an inland sea about 265 million years ago</li>
+    <li>Lechuguilla Cave is the deepest limestone cave in the United States. It is the fifth-longest cave on the planet.</li>
+    <li>The bats here are Mexican free-tail bats and as many as 300,000 of them billow out of the caverns each night.</li>
+    <li>It is in New Mexico</li>
+</ul>
+
+<button type="button" id="last-yellow">Last Item Yellow</button>
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
     "use strict";
 
-    //  $(document).ready(function() {
-    //
-    //     $('dd').click(function(event) {
-    //         event.preventDefault();
-    //
-    //         $(this).toggleClass('invisable');
-    //     });
-    // });
 
-    //IN-CLASS SOLUTION
     $('.toggle-link').click(function(event){
         event.preventDefault();
         $('dd').toggleClass('invisable')
@@ -77,6 +92,29 @@ not-invisable{
 
     })
 
+    $('button').click(function(event){
+        event.preventDefault();
+        $('ul').each(function(){
+                $(this).children().last().css('background', 'yellow')
+            })
+        })
+
+
+    $('h3').click(function(event) {
+        event.preventDefault();
+        $('ul').each(function () {
+            $(this).children().last().css('font-weight', 'bold')
+
+
+        })
+
+    })
+
+    $('li').click(function(event){
+        event.preventDefault();
+        $(this).parent().children().first().css('color', 'blue')
+
+    })
 
 
 
