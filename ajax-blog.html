@@ -11,8 +11,14 @@
 </head>
 <body class="bg-primary">
 
-<h1 class=" text-white">This is my Blog!</h1>
 
+<!--<h3>Add Post</h3>-->
+<!--<form id="postForm" action='data/blog.json'>-->
+<!--    <input type="text" id="title" placeholder="title"><br>-->
+<!--    <textarea placeholder="body" id="body"></textarea><br>-->
+<!--    <input type="submit" value="submit">-->
+</form>
+<h1 class=" text-white">This is my Blog!</h1>
 <div id="posts">
 
 
@@ -36,8 +42,9 @@
             //content functions go inside of ajax GET request
 
 
-            let html = ''
+
             const addBlog = (data) => {
+                let html = ''
                 for (let i = 0; i < data.length; i++) {
                     html += '<div>' +
                         '<p class="border p-3 " >' + data[i].title + '</p>' +
@@ -48,6 +55,7 @@
                 }
                 return html
             }
+
 
             //AJAX request for button
             const updateButton = () => {
@@ -65,8 +73,22 @@
             });
         });
 
+        // $('#postForm').submit(function (e){
+        //     e.preventDefault;
+        //     let title=$('#title').val();
+        //     let body =$('#body').val();
+        //     let url =$(this).attr('action');
+
+        //     $.post(url, {title: title, body:body}).done(function(data){
+        //         console.log(data)
+        //     })
+        //
+        // })
 
     })();
+//    NOTE:
+//    Watch this for a good example for on GET & POST request
+//    https://www.youtube.com/watch?v=eR3rcalj06Q
 </script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

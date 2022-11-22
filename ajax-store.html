@@ -11,7 +11,7 @@
 </head>
 <body class="bg-primary">
 
-<h1 class=" text-white">My Tool Store</h1>
+<h1 class=" text-white ">My Tool Store</h1>
 
 <table id="products">
     <thead>
@@ -26,10 +26,13 @@
 
 
     <!--    CONTENT GOES HER-->
+
+
     </tbody>
+
 </table>
 
-<button class=" btn btn-success updateBtn">Update Content</button>
+<button class=" btn btn-success updateBtn d-flex justify-content-center">Update Content</button>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -37,8 +40,14 @@
 <script>
     (function () {
         "use strict";
+
+
         // TODO: Create an AJAX GET request for the file under data/inventory.json
-        $.get('data/inventory.json').done(function (data) {
+        $.get('data/inventory.json').done(function(data, status, jqXhr) {
+            alert("AJAX call completed successfully!");
+            console.log("Request status: " + status);
+            console.log("Data returned from server:");
+            console.log(data);
 
             //content functions go inside of ajax GET request
 
@@ -46,7 +55,8 @@
             let html = ''
             const renderContent = (data) => {
                 for (let i = 0; i < data.length; i++) {
-                    html += '<tbody>' +
+                    html +=
+                        '<tbody>' +
                         '<td class="border p-3 " >' + data[i].title + '</td>' +
                         '<td class="border p-3" >' + data[i].quantity + '</td>' +
                         '<td class="border p-3" >' + data[i].price + '</td>' +
@@ -60,7 +70,7 @@
             const updateButton = () => {
                 $.get('data/inventory.json').done(function (data) {
                     $('#products').html(renderContent(data));
-                });  //Button AJAX requests ends here
+                });
 
 
             }

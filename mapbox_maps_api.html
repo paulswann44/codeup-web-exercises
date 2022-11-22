@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Favorite Resturants</title>
+    <!-- Mapbox CSS -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet'/>
+    <!-- Custom CSS -->
+    <style>
+        #map {
+            /* the width and height may be set to any size */
+            width: 50%;
+            height: 900px;
+
+        }
+
+        .img {
+            width: 300px;
+            height: 200px;
+
+
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>My First Mapbox Map!</h1>
+<p>Note to reader! This was made by a real foodie! </p>
+
+<!-- The HTML element that serves as the Mapbox container -->
+<div id='map'></div>
+
+<!-- Mapbox JS -->
+<script src="js/keys.js"></script>   <!--Do this first, bring in keys-->
+<script src="js/mapbox-geocoder-utils.js"></script>
+
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+
+<!-- Custom JS -->
+<script>
+
+    //The Token
+    let accessToken = MAPBOX_TOKEN;
+
+    mapboxgl.accessToken = accessToken;
+
+    let map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9', //URL Style
+        zoom: 10, //ZOOM
+        center: [-73.57764009998246, 45.51672618786305] //This is sat to the first location of my resturant
+    });
+
+    //This is the array of objects of favorite objects.
+    let favoriteResturants = [
+        {
+            name: "<a href='https://schwartzsdeli.com/'> Scwartz Deli </a>",
+            address: "3895 St Laurent Blvd, Montreal, Quebec H2W 1X9, Canada",
+            suggestion: "The smoked-meat on Rye Bread is a must!",
+            image: "<img class='img' src='img/smoked-meat.jpeg'>"
+
+
+        },
+        {
+            name: 'Koda Restaurant & Lounge',
+            address: "985 Flushing Ave, Brooklyn, NY 11206",
+            suggestion: "They serve the best wings in the USA!",
+            image: "<img class='img' src='img/wings.jpeg'>"
+
+
+        },
+        {
+            name: "OLE RUDY'S BAR-B-QUE",
+            address: "2831 GA-36, Jackson, GA 30233",
+            suggestion: "I suggest either the brisket or ribs.  It is better than Texas BBQ.  ",
+            image: "<img class='img' src='img/ribs.jpeg'>"
+
+        },
+
+
+    ];
+
+
+    favoriteResturants.forEach(function (resturant) { // This is an each loop iterating the object array
+        geocode(resturant.address, accessToken).then(function (coordinates) {  //input access
+            var popup = new mapboxgl.Popup()  //this is fine
+                .setHTML(
+                    '<h1>' + resturant.name + '</h1>' +
+                    '<p>' + resturant.address + '</p>' +
+                    '<p>' + resturant.suggestion + '</p>' +
+                    '<p>' + resturant.image + '</p>');
+
+
+            var marker = new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .addTo(map)
+                .setPopup(popup);
+            popup.addTo(map);
+        });
+    });
+
+
+</script>
+
+</body>
+</html>
+
