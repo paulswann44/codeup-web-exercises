@@ -1,0 +1,197 @@
+:root {
+    --ol: dashed red 2px;
+}
+
+.ol {
+    outline: var(--ol);
+
+
+}
+
+/*
+
+nav {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 30s ease infinite;
+    height: 10vh;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+!*
+SOURCE:
+https://codepen.io/P1N2O/pen/pyBNzX
+*!
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+/*NOTES*/
+/*WEATHER DESIGN LOGOS*/
+/*https://codepen.io/tiffanyadu/pen/OprNrV*/
+/*https://gscode.in/css-weather-widget/*/
+
+
+/* BACKGROUND CODE FOR VIDEO*/
+/*https://css-tricks.com/full-page-background-video-styles/*/
+
+/*THIS IS THE HEADER*/
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+html, body {
+    height: 100%;
+}
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 150%;
+    line-height: 1.4;
+}
+
+body {
+    margin: 0;
+}
+
+.viewport-header {
+    position: relative;
+    height: 30vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+
+body {
+    background: black;
+    color: white;
+}
+
+.city-search {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*border: 0px none transparent;*/
+    border-radius: 10px;
+    line-height: 10px;
+    background: #efdefc;
+    color: #930;
+    padding: 3px 5px;
+    margin-right: 30px;
+}
+h1 {
+    font-family: 'Syncopate', sans-serif;
+    color: #4a3a27;
+    text-transform: uppercase;
+    letter-spacing: 3vw;
+    line-height: 1.2;
+    font-size: 3vw;
+    text-align: center;
+
+
+
+span {
+    display: block;
+    font-size: 10vw;
+    letter-spacing: -1.3vw;
+}
+
+}
+
+
+main {
+    width: 100%;
+    /*left: 10%;*/
+    height: 40vh;
+    overflow: visible;
+    background: rgba(black, 0.66);
+    color: black;
+    position: relative;
+    padding: 1rem;
+}
+.card-body {
+    background-color: #3B94D9;
+
+}
+
+
+.card:hover {
+    animation: bounce 2s ease-in-out infinite ;
+}
+
+@keyframes bounce {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-50px); }
+    100% { transform: translateY(0); }
+}
+
+.card-title{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+#map {
+    width: 100%;
+    height: 700px;
+    /*background-color: #3B94D9;*/
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
+}
+
+li {
+    list-style: none;
+    color: #D0CFCF;
+    cursor: pointer;
+}
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+

@@ -2,3 +2,5 @@
 .idea/*
 *.iml
 keys.js
+weather-card.html
+weather-icons.html
