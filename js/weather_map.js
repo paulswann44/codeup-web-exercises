@@ -50,6 +50,8 @@ function onDragEnd() {
 
 
 
+
+
 // When clicked the "city-search" (class name) button geolocates the city
 $('#btn').click(function () {  //click submit button to activate function
     geocode($('#search').val(), MAPBOX_TOKEN, map).then(function (coordinates) { //this converts the address to coordinates by calling the function
