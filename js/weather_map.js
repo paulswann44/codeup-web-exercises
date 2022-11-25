@@ -58,7 +58,7 @@ function onDragEnd() {
 
 // When clicked the "city-search" (class name) button geolocates the city
 $('#btn').click(function (){  //click submit button to activate function
-    geocode($('#search').val(), MAPBOX_TOKEN).then(function(coordinates) { //this converts the address to coordinates by calling the function
+    geocode($('#search').val(), MAPBOX_TOKEN,map).then(function(coordinates) { //this converts the address to coordinates by calling the function
         map.setCenter(coordinates)  //It should reset the center to the coordinates from the data
         setWeatherData(coordinates[0],coordinates[1]) //I want the lat & long
         map.setLngLat(coordinates) //A marker should be placed onto the cordinates
@@ -69,3 +69,5 @@ $('#btn').click(function (){  //click submit button to activate function
 
 
 })
+
+$('#test').css('color', 'yellow')
