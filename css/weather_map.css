@@ -1,5 +1,6 @@
 :root {
     --ol: dashed red 2px;
+    --bg-1: black;
 }
 
 .ol {
@@ -8,56 +9,7 @@
 
 }
 
-/*
 
-nav {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 30s ease infinite;
-    height: 10vh;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-
-!*
-SOURCE:
-https://codepen.io/P1N2O/pen/pyBNzX
-*!
-
-
-
-
-
-
-
-
-
-
-
-*/
-
-
-/*NOTES*/
-/*WEATHER DESIGN LOGOS*/
-/*https://codepen.io/tiffanyadu/pen/OprNrV*/
-/*https://gscode.in/css-weather-widget/*/
-
-
-/* BACKGROUND CODE FOR VIDEO*/
-/*https://css-tricks.com/full-page-background-video-styles/*/
-
-/*THIS IS THE HEADER*/
 video {
     object-fit: cover;
     width: 100vw;
@@ -92,17 +44,10 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .logo {
     border-radius: 50%;
     width: 50px;
     height: 50px;
-}
-
-
-body {
-    background: black;
-    color: white;
 }
 
 .city-search {
@@ -116,6 +61,7 @@ body {
     padding: 3px 5px;
     margin-right: 30px;
 }
+
 h1 {
     font-family: 'Syncopate', sans-serif;
     color: #4a3a27;
@@ -125,8 +71,6 @@ h1 {
     font-size: 3vw;
     text-align: center;
 
-
-
 span {
     display: block;
     font-size: 10vw;
@@ -135,10 +79,8 @@ span {
 
 }
 
-
 main {
     width: 100%;
-    /*left: 10%;*/
     height: 40vh;
     overflow: visible;
     background: rgba(black, 0.66);
@@ -147,10 +89,14 @@ main {
     padding: 1rem;
 }
 .card-body {
-    background-color: #3B94D9;
-
+    background-color: #569bd3;
+    box-shadow: 20px 15px 5px black;
+    border: black 5px solid;
 }
-
+.card{
+    margin-bottom: 2.2rem;
+    opacity: 0.75;
+}
 
 .card:hover {
     animation: bounce 2s ease-in-out infinite ;
@@ -162,22 +108,45 @@ main {
     100% { transform: translateY(0); }
 }
 
+
+
 .card-title{
     display: flex;
     justify-content: center;
     padding: 0;
 }
 
+.weather-list{
+    padding: 0;
+}
+
 #map {
     width: 100%;
+    /*left: 10rem;*/
     height: 700px;
-    /*background-color: #3B94D9;*/
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     margin-top: 1rem;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
+
+}
+
+
+
+
+
+.coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
 }
 
 li {
@@ -188,10 +157,41 @@ li {
 
 
 a{
-    text-decoration: none;
-    color: black;
+    /*text-decoration: none;*/
+    /*color: var(--bg-1);*/
+    color: #D0CFCF;
 }
 
+a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
 
+a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:active {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+h5 {
+    font-weight: 800;
+    color: var(--bg-1);
+    margin: 0;
+    padding: 0;
+    text-decoration: underline;
+}
 
 

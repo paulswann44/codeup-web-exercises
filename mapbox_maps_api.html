@@ -44,6 +44,7 @@
     //The Token
     let accessToken = MAPBOX_TOKEN;
 
+    //This is my token
     mapboxgl.accessToken = accessToken;
 
     let map = new mapboxgl.Map({
@@ -65,7 +66,7 @@
         },
         {
             name: 'Koda Restaurant & Lounge',
-            address: "985 Flushing Ave, Brooklyn, NY 11206",
+            address: "985 Flushing Ave, Brooklyn NY, 11206",
             suggestion: "They serve the best wings in the USA!",
             image: "<img class='img' src='img/wings.jpeg'>"
 
@@ -83,8 +84,11 @@
     ];
 
 
-    favoriteResturants.forEach(function (resturant) { // This is an each loop iterating the object array
-        geocode(resturant.address, accessToken).then(function (coordinates) {  //input access
+    favoriteResturants.forEach(
+        function (resturant) { // This is an each loop iterating the object array
+        geocode(resturant.address, accessToken).then(
+
+            function (coordinates) {  //input access
             var popup = new mapboxgl.Popup()  //this is fine
                 .setHTML(
                     '<h1>' + resturant.name + '</h1>' +
