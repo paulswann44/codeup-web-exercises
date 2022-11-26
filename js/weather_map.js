@@ -38,7 +38,8 @@ const marker = new mapboxgl.Marker({
     .addTo(map);
 
 function onDragEnd() {
-    const lngLat = marker.getLngLat();
+    const lngLat = marker.getLngLat();//Produces this object when dragged- {lng: -96.74206835937004, lat: 32.71606049688401}
+    // console.log('lat:' + lngLat.lat, '/typeof: ' + typeof lngLat.lat,'/lng:'+ lngLat.lng, '/typeof: ' + typeof lngLat.lng);
     coordinates.style.display = 'block';
     coordinates.innerHTML = `Longitude: ${lngLat.lng}</br>Latitude: ${lngLat.lat}`;
 }
@@ -69,16 +70,31 @@ $('#btn').click(
 
 //+++++++++++++++++++++++++++++++++++++++WEATHER GET REQUEST++++++++++++++++++++++++++++++++++++
 
+function weatherData () {
+    $.get("http://api.openweathermap.org/data/2.5/forecast", {
+        APPID: OPEN_WEATHER_APPID,
+        lat: marker.getLngLat().lat,  //it should produce a number with lat coordinate -
+        lon: marker.getLngLat().lng, // it should produce a number with lat coordinate -
+        units: "imperial"
+    }).done(function (data) {
+        console.log('5 day forecast', data);
+    });
+}
+
+
 // function weatherData () {
 //     $.get("http://api.openweathermap.org/data/2.5/forecast", {
 //         APPID: OPEN_WEATHER_APPID,
-//         lat: marker.getLngLat(),
-//         lon: marker.getLngLat(),
+//         lat: marker.getLatLng().lat, //how to get lat from marker?
+//         lon: marker.getLatLng().lng, //how to get long from marker?
 //         units: "imperial"
 //     }).done(function (data) {
-//         console.log('5 day forecast', data);
+//         console.log('5 day forecast', data)
+//
+//         $('.temperature').each(function (index) {
+//             $(this).html('High: ' + data.daily[index].temp.max + 'F'
+//                 + '<br>'
+//                 + 'Low: ' + data.daily[index].temp.min + 'F')
+//         })
 //     });
-// }
-
-
-
+// // }
