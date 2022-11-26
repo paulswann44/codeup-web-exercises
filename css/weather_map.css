@@ -130,25 +130,24 @@ main {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+    border: black 2px solid;
 
 }
-
-
-
 
 
 .coordinates {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
-    position: absolute;
-    bottom: 40px;
-    left: 10px;
+    position: relative;
+    bottom: 65px;
+    left: 5px;
     padding: 5px 10px;
     margin: 0;
     font-size: 11px;
     line-height: 18px;
     border-radius: 3px;
     display: none;
+    width: 150px;
 }
 
 li {
@@ -196,4 +195,11 @@ h5 {
     text-decoration: underline;
 }
 
-
+/* change background and tip color to green */
+.edit-popup .mapboxgl-popup-content {
+    background-color: skyblue;
+    display: flex;
+    align-items: center;
+    top: -10px;
+    height: 100px;
+}

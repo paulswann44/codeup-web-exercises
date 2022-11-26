@@ -5,7 +5,11 @@
 *Draggable Cursor found in documentation
 *https://docs.mapbox.com/mapbox-gl-js/example/drag-a-marker/
 *
-
+* Geolocation
+* https://docs.mapbox.com/mapbox-gl-js/example/locate-user/
+*
+* API References
+* https://docs.mapbox.com/mapbox-gl-js/api/map/#map#on
 * */
 
 
@@ -24,89 +28,43 @@ let map = new mapboxgl.Map({
 
 });
 
-// navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
-//     enableHighAccuracy: true
-// })
-//
-// function successLocation(position) {
-//     setupMap([position.coords.longitude, position.coords.latitude])
-// }
-//
-// function errorLocation() {
-//     setupMap([-2.24, 53.48])
-// }
+// Add zoom and rotation controls to the map (Note #1)
+map.addControl(new mapboxgl.NavigationControl());
 
-// // Add zoom and rotation controls to the map.
-// map.addControl(new mapboxgl.NavigationControl());
-
-
-//Creates a marker and establishes that it is draggable (Note #1)
-let marker = new mapboxgl.Marker({
-    draggable: true
-})
-
+const marker = new mapboxgl.Marker({draggable: true})
     .setLngLat([-96.7970, 32.7767])
     .addTo(map);
 
+marker.on('dragend', onDragEnd());//"on" is a jQuery handler
 
-marker.on('dragend', onDragEnd);
-
-
-//Draggable Function (Note #1)
+//tests the drag on lat & lng
 function onDragEnd() {
     const lngLat = marker.getLngLat();
     coordinates.style.display = 'block';
     coordinates.innerHTML = `Longitude: ${lngLat.lng}</br>Latitude: ${lngLat.lat}`;
-
 }
 
 
 
-// When clicked the "city-search" (class name) button geolocates the city
-$('#btn').click(function findCity () {  //click submit button to activate function
-    geocode($('#search').val(), MAPBOX_TOKEN, map).then(function (coordinates) { //this converts the address to coordinates by calling the function
-        map.setCenter(coordinates)  //It should reset the center to the coordinates from the data
-        // setWeatherData(coordinates[0], coordinates[1]) //I want the lat & long
-        map.setLngLat(coordinates) //A marker should be placed onto the cordinates
-         new mapboxgl.Marker().setLngLat([coordinates]).addTo(map);
-    })
-})
 
-
-// $('#btn').click(function () {  //click submit button to activate function
-//     geocode($('#search').val(), MAPBOX_TOKEN, map).then(function (coordinates){
-//     var popup = new mapboxgl.Popup()
-//         var popup = new mapboxgl.Popup()
-//             .setHTML(`this is your city location: ${renderPhysicalAddress}`);
-//         var marker = new mapboxgl.Marker()
-//             .setLngLat(coordinates)
-//             .addTo(map)
-//             .setPopup(popup);
-//         popup.addTo(map);
-//     });
-// })
-
-
-$('#btn').click(function renderPhysicalAddress (){  //When I click the button
+$('#btn').click(function renderPhysicalAddress() {  //When I click the button
     geocode($('#search').val(), MAPBOX_TOKEN, map).then(
-        function getLatLng (coordinates) { //this converts the address to lng & lat by calling the function
-        let lng = coordinates[0]; //longitude of submitted address location
-        // console.log("Lng: " + coordinates[0])
-        let lat = coordinates[1]; //latitude of submitted address location
-        // console.log("Lat: " + coordinates[1])
-            reverseGeocode({lat, lng}, MAPBOX_TOKEN).then(function address (results) {
-                 $('#city-name').html(results); //writes the full physical address of the city
-    var popup = new mapboxgl.Popup()
-        var popup = new mapboxgl.Popup()
-            .setHTML(`${results}`);
-        var marker = new mapboxgl.Marker()
-            .setLngLat(coordinates)
-            .addTo(map)
-            .setPopup(popup);
-        popup.addTo(map);
-            })
-    })
-})
+        function getLatLng(coordinates) { //this converts the address to lng & lat by calling the function
+            let lng = coordinates[0]; //longitude of submitted address location
+            let lat = coordinates[1]; //latitude of submitted address location
+            map.setCenter(coordinates)  //It should reset the center to the coordinates from the data
+            marker.setLngLat(coordinates)// -_-  it is not Map....It is marker
+            reverseGeocode({lat, lng}, MAPBOX_TOKEN).then(function address(results) {
+                $('#city-name').html(results); //writes the full physical address of the city
+                let popup = new mapboxgl.Popup({className: 'edit-popup'}) //This generates a popup with a custom class
+                    .setLngLat(coordinates)//Sets the pop at the searched destination
+                    .setHTML(`Your location is:<br> ${results} <br> Your coordinates are: <br> ${coordinates}`)//Displays the physical address
+                    .addTo(map);//adds it to the map
+            });
+        });
+});
+
+
 /*
 * ---NOTE #2 renderPhysicalAddress---
 * This function gets the input value from the search bar once the button is clicked.
@@ -121,6 +79,14 @@ $('#btn').click(function renderPhysicalAddress (){  //When I click the button
 
 //+++++++++++++++++++++++++++++++++++++++WEATHER GET REQUEST++++++++++++++++++++++++++++++++++++
 
-
-
+function weatherData () {
+    $.get("http://api.openweathermap.org/data/2.5/forecast", {
+        APPID: OPEN_WEATHER_APPID,
+        lat: marker.getLngLat(),
+        lon: marker.getLngLat(),
+        units: "imperial"
+    }).done(function (data) {
+        console.log('5 day forecast', data);
+    });
+}
 

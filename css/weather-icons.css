@@ -43,6 +43,7 @@ h1.title {
     letter-spacing: 0;
     position: absolute;
 }
+
 .clear, .sunny, .mostlysunny, .partlycloudy, .mostlycloudy, .partlysunny, .cloudy, .fog, .hazy, .chancerain, .rain, .chancetstorms, .tstorms, .chancesleet, .sleet, .chanceflurries, .flurries, .chancesnow, .snow, .inner {
     height: inherit;
     width: inherit;
