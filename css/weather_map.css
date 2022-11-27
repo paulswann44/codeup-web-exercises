@@ -101,18 +101,18 @@ main {
 }
 
 .card:hover {
-    animation: bounce 2s ease-in-out infinite ;
+    animation: bounce 2s ease-in-out infinite;
 }
 
 @keyframes bounce {
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-50px); }
-    100% { transform: translateY(0); }
+    100% { transform: translateY(-50px); }
 }
 
 
 
-.card-title{
+.card-title .date{
     display: flex;
     justify-content: center;
     padding: 0;

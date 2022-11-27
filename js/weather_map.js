@@ -44,57 +44,72 @@ function onDragEnd() {
     coordinates.innerHTML = `Longitude: ${lngLat.lng}</br>Latitude: ${lngLat.lat}`;
 }
 
-marker.on('dragend', onDragEnd);
+marker.on('dragend', weatherData());
 
 
 $('#btn').click(
     function renderPhysicalAddress() {  //When I click the button
-    geocode($('#search').val(), MAPBOX_TOKEN, map).then(
-        function getLatLong(coordinates) { //this converts the address to lng & lat by calling the function
-            let lng = coordinates[0]; //longitude of submitted address location
-            let lat = coordinates[1]; //latitude of submitted address location
-            map.setCenter(coordinates)  //It should reset the center to the coordinates from the data
-            // weatherData(coordinates[0], coordinates[1])
-            marker.setLngLat(coordinates)// -_-  it is not Map....It is marker
-            reverseGeocode({lat, lng}, MAPBOX_TOKEN).then(function address(results) {
-                $('#city-name').html(results); //writes the full physical address of the city
-                // let popup = new mapboxgl.Popup({className: 'edit-popup'}) //This generates a popup with a custom class
-                //     .setLngLat(coordinates)//Sets the pop at the searched destination
-                //     .setHTML(`Your location is:<br> ${results} <br> Your coordinates are: <br> ${coordinates}`)//Displays the physical address
-                //     .addTo(map);//adds it to the map
+        geocode($('#search').val(), MAPBOX_TOKEN, map).then(
+            function getLatLong(coordinates) { //this converts the address to lng & lat by calling the function
+                let lng = coordinates[0]; //longitude of submitted address location
+                let lat = coordinates[1]; //latitude of submitted address location
+                map.setCenter(coordinates)  //It should reset the center to the coordinates from the data
+                weatherData(lat, lng)
+                marker.setLngLat(coordinates)// -_-  it is not Map....It is marker
+                reverseGeocode({lat, lng}, MAPBOX_TOKEN).then(function address(results) {
+                    // $('#city-name').html(results); //see note (2) below, but intend to delete
+                    let popup = new mapboxgl.Popup({className: 'edit-popup'}) //This generates a popup with a custom class
+                        .setLngLat(coordinates)//Sets the pop at the searched destination
+                        .setHTML(`Your location is:<br> ${results} <br> Your coordinates are: <br> ${coordinates}`)//Displays the physical address
+                        .addTo(map);//adds it to the map
+                });
             });
-        });
-});
+    });
 
-
-
+/*
+* NOTE #2
+* I will delete later because I can possibly use the JSON file, so it just shows the city
+*
+* */
 //+++++++++++++++++++++++++++++++++++++++WEATHER GET REQUEST++++++++++++++++++++++++++++++++++++
 
 function weatherData () {
-    $.get("http://api.openweathermap.org/data/2.5/forecast", {
+    $.get("http://api.openweathermap.org/data/2.5/forecast", { //This is the only endpoint that will not cause me an error
         APPID: OPEN_WEATHER_APPID,
-        lat: marker.getLngLat().lat,  //it should produce a number with lat coordinate -
-        lon: marker.getLngLat().lng, // it should produce a number with lat coordinate -
-        units: "imperial"
+        lat: marker.getLngLat().lat,  //it should produce a number with lat coordinate wherever the marker moves
+        lon: marker.getLngLat().lng, // it should produce a number with long coordinate - wherever the marker moves
+        units: "imperial",
+        exclude: 'minutely,hourly,current,alerts'
     }).done(function (data) {
-        console.log('5 day forecast', data);
+        $('.date').each(function(){
+            $(this).html('date path goes here'); //Endpoint won't work
+        });
+        $('.temprature').each(function(){  //each temprature should have this
+            $(this).html('temprature path goes here'); //Endpoint won't work
+        });
+        $('.humidity').each(function(){
+            $(this).html('humidity path goes here'); //Endpoint won't work
+        });
+        $('.pressure').each(function(){
+            $(this).html('pressure path goes here'); //Endpoint won't work
+        });
+        $('.wind').each(function(){
+            $(this).html('wind path goes here'); //Endpoint won't work
+        });
+        $('.wind').each(function(){
+            $(this).html('wind path goes here'); //Endpoint won't work
+        });
+        $('#city-name').html('City name path goes here');
+
+        console.log('The entire response:', data);
+        console.log('Diving in - here is current information: ', data.current);
+        console.log('A step further - information for tomorrow: ', data.daily[1]);//is it daily needed?
+    }).fail(function (jqXhr, status, error) {
+        console.log(jqXhr);
+        console.log(status);
+        console.log(error);
     });
 }
 
 
-// function weatherData () {
-//     $.get("http://api.openweathermap.org/data/2.5/forecast", {
-//         APPID: OPEN_WEATHER_APPID,
-//         lat: marker.getLatLng().lat, //how to get lat from marker?
-//         lon: marker.getLatLng().lng, //how to get long from marker?
-//         units: "imperial"
-//     }).done(function (data) {
-//         console.log('5 day forecast', data)
-//
-//         $('.temperature').each(function (index) {
-//             $(this).html('High: ' + data.daily[index].temp.max + 'F'
-//                 + '<br>'
-//                 + 'Low: ' + data.daily[index].temp.min + 'F')
-//         })
-//     });
-// // }
+

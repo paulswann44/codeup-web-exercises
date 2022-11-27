@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/keys.js"></script>
+<script src="js/keys.js"></script>
+<script>
+  $.get("http://api.openweathermap.org/data/2.5/weather", {
+    APPID: OPEN_WEATHER_APPID,
+    lat:    29.423017,
+    lon:   -98.48527,
+    units: "imperial"
+  }).done(function(data) {
+    console.log('current weather', data);
+  });
+</script>
+</body>
+</html>
