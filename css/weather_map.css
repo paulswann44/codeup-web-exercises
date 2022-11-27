@@ -93,7 +93,9 @@ main {
     background-color: var(--bg-3);
     box-shadow: 20px 15px 5px black;
     margin-right: 2rem;
+    margin-left: 1rem;
     border: black 2px solid;
+    padding-bottom: .5em;
 
 }
 

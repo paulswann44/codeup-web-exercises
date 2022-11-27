@@ -1,25 +1,12 @@
 "use strict";
 
-/*
-* ---NOTES  #1---
-*Draggable Cursor found in documentation
-*https://docs.mapbox.com/mapbox-gl-js/example/drag-a-marker/
-*
-* Geolocation
-* https://docs.mapbox.com/mapbox-gl-js/example/locate-user/
-*
-* API References
-* https://docs.mapbox.com/mapbox-gl-js/api/map/#map#on
-* */
 
 
-// Token access
 
 var accessToken = MAPBOX_TOKEN;
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 
-//creates map (given)
 let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
@@ -28,23 +15,20 @@ let map = new mapboxgl.Map({
 
 });
 
-// Add zoom and rotation controls to the map (Note #1)
 map.addControl(new mapboxgl.NavigationControl());
 
-// const marker = new mapboxgl.Marker({
+// let marker = new mapboxgl.Marker({
 //     draggable: true
 // })
 //     .setLngLat([-96.7970, 32.7767])
 //     .addTo(map);
 
-// function onDragEnd() {
+// marker.on('dragend', function onDragEnd() {
 //     const lngLat = marker.getLngLat();//Produces this object when dragged- {lng: -96.74206835937004, lat: 32.71606049688401}
-// console.log('lat:' + lngLat.lat, '/typeof: ' + typeof lngLat.lat,'/lng:'+ lngLat.lng, '/typeof: ' + typeof lngLat.lng);
-// coordinates.style.display = 'block';
-// coordinates.innerHTML = `Longitude: ${lngLat.lng}</br>Latitude: ${lngLat.lat}`;
-// }
-
-// marker.on('dragend', getWeatherData());
+//     console.log('lat:' + lngLat.lat, '/typeof: ' + typeof lngLat.lat, '/lng:' + lngLat.lng, '/typeof: ' + typeof lngLat.lng);
+//     coordinates.style.display = 'block';
+//     coordinates.innerHTML = `Longitude: ${lngLat.lng}</br>Latitude: ${lngLat.lat}`;
+// });
 
 
 $('#btn').click(
@@ -60,13 +44,7 @@ $('#btn').click(
                     .setLngLat([coordinates[0], coordinates[1]])
                     .addTo(map)
                 marker.setLngLat(coordinates)// -_-  it is not Map....It is marker
-
-
-                //sets weather coodinates from input
                 getWeatherData(coordinates)
-
-
-
                 reverseGeocode({lat, lng}, MAPBOX_TOKEN).then(function address(results) {
                     $('#city-name').html(results); //see note (2) below, but intend to delete
 
@@ -108,7 +86,7 @@ let append = function (data) {
             wind: {speed}
         } = data[i]
         html += `
-            <div class="card  col-lg">
+            <div class="card  col-xxl">
                <h6 class="card-header text-center " >${dt_txt.substring(5, 7)}.${dt_txt.substring(8, 10)}.${dt_txt.substring(0, 4)}
                </h6>
                <img src='http://openweathermap.org/img/w/${icon}.png' class="img-thumbnail mx-auto d-block border-0" style='width: 100px; height: 100px;' alt="...">
