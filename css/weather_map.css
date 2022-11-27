@@ -1,11 +1,12 @@
 :root {
     --ol: dashed red 2px;
     --bg-1: black;
+    --bg-2: #D0CFCF;
+    --bg-3: rgb(86,155,211, 0.6);
 }
 
 .ol {
     outline: var(--ol);
-
 
 }
 
@@ -19,9 +20,6 @@ video {
     top: 0;
     left: 0;
 }
-
-
-
 
 html, body {
     height: 100%;
@@ -54,10 +52,8 @@ body {
 .city-search {
     -moz-appearance: none;
     -webkit-appearance: none;
-    /*border: 0px none transparent;*/
     border-radius: 10px;
     line-height: 10px;
-    /*background: #efdefc;*/
     background: #EFDEFCFF;
     color: #930;
     padding: 3px 5px;
@@ -90,24 +86,28 @@ main {
     position: relative;
     padding: 1rem;
 }
-.card-body {
-    background-color: #569bd3;
-    box-shadow: 20px 15px 5px black;
-    border: black 5px solid;
-}
+
 .card{
     margin-bottom: 2.2rem;
     opacity: 0.75;
+    background-color: var(--bg-3);
+    box-shadow: 20px 15px 5px black;
+    margin-right: 2rem;
+    border: black 2px solid;
+
+}
+
+.list-group-item{
+    background-color: var(--bg-3);
 }
 
 .card:hover {
-    animation: bounce 2s ease-in-out infinite;
+    animation: bounce 20s ease-in infinite;
 }
 
 @keyframes bounce {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-50px); }
-    100% { transform: translateY(-50px); }
+    0%   { transform: translateY(-80px); }
+    100%  { transform: translateY(-80px); }
 }
 
 
@@ -152,15 +152,13 @@ main {
 
 li {
     list-style: none;
-    color: #D0CFCF;
+    color: var(--bg-2);
     cursor: pointer;
 }
 
 
 a{
-    /*text-decoration: none;*/
-    /*color: var(--bg-1);*/
-    color: #D0CFCF;
+    color: var(--bg-2);
 }
 
 a:link {
@@ -195,11 +193,12 @@ h5 {
     text-decoration: underline;
 }
 
-/* change background and tip color to green */
-.edit-popup .mapboxgl-popup-content {
-    background-color: skyblue;
-    display: flex;
-    align-items: center;
-    top: -10px;
-    height: 100px;
+
+.card-text .humidity .wind . card-header{
+    font-size: small;
+}
+
+label{
+    color: white;
+    cursor: pointer;
 }
