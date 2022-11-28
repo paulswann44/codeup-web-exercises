@@ -99,6 +99,10 @@ main {
 
 }
 
+.card-text .humidity .wind . card-header{
+    font-size: small;
+}
+
 .list-group-item{
     background-color: var(--bg-3);
 }
@@ -122,6 +126,11 @@ main {
 
 .weather-list{
     padding: 0;
+}
+
+.img{
+    width: 100px;
+    height: 100px;
 }
 
 #map {
@@ -195,10 +204,6 @@ h5 {
     text-decoration: underline;
 }
 
-
-.card-text .humidity .wind . card-header{
-    font-size: small;
-}
 
 label{
     color: white;
