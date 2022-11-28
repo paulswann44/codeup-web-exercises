@@ -18,11 +18,11 @@ let map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl());
 
-const marker = new mapboxgl.Marker({
+let marker = new mapboxgl.Marker({
     draggable: true
 })
-    .setLngLat([-96.7970, 32.7767])
-    .addTo(map);
+//     .setLngLat([-96.7970, 32.7767])
+//     .addTo(map);
 
 function onDragEnd() {
     const lngLat = marker.getLngLat();
@@ -65,17 +65,19 @@ function getWeatherData(coordinates) {
         exclude: 'minutely,hourly,current,alerts'
     }).done(function (data) {
 console.log(data);
+
+        //appending the weather
         let forecasts = data.list
         console.log("Data List: ", data.list)
         let appendedForecast = append(forecasts);
         $('#weather').html(appendedForecast);
         console.log("forecast: ", forecasts)
 
-        //City Name
-        $('#city-name').html(data.city.name);
-        console.log("Data City: ", data.city.name)
-
-
+        //Rendering City Name
+        let city = data.city.name
+        let country = data.city.country
+        $('#city-name').html(`${city}, ${country}`);
+        console.log("Data country: ", data.city.country)
 
 
     }).fail(function (jqXhr, status, error) {
