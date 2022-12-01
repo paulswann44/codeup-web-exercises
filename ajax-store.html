@@ -44,6 +44,8 @@
 
         // TODO: Create an AJAX GET request for the file under data/inventory.json
         $.get('data/inventory.json').done(function(data, status, jqXhr) {
+
+
             alert("AJAX call completed successfully!");
             console.log("Request status: " + status);
             console.log("Data returned from server:");
@@ -55,13 +57,12 @@
             let html = ''
             const renderContent = (data) => {
                 for (let i = 0; i < data.length; i++) {
-                    html +=
-                        '<tbody>' +
-                        '<td class="border p-3 " >' + data[i].title + '</td>' +
-                        '<td class="border p-3" >' + data[i].quantity + '</td>' +
-                        '<td class="border p-3" >' + data[i].price + '</td>' +
-                        '<td class="border p-3" >' + data[i].categories + '</td>' +
-                        '</tbody>';
+                    html += '<tr>'
+                    html += '<th class="border p-3 " >' + data[i].title + '</th>'
+                    html += '<th class="border p-3" >' + data[i].quantity + '</th>'
+                    html += '<th class="border p-3" >' + data[i].price + '</th>'
+                    html += '<th class="border p-3" >' + data[i].categories.join(', ') + '</th>'
+                    html +=  '</tr>';
                 }
                 return html
             }

@@ -137,7 +137,6 @@ main {
 
 #map {
     width: 100%;
-    /*left: 10rem;*/
     height: 700px;
     margin-bottom: 1rem;
     display: flex;

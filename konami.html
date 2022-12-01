@@ -18,21 +18,24 @@
 <script>
     "use strict";
 
-    let userCode = [];
+    let userInput = [];
+
+    let i = 0;
+    let konami = [38, 38, 40, 40, 37, 39, 37,39, 66, 65, 13];
 
 
-    let secretCode = [38, 38, 40, 40, 37, 39, 37,39, 66, 65, 13]
-    //This is the event listener
-    $(document).keyup(function(event){
-        // console.log(event.keyCode);
-        userCode.push(event.keyCode);
-        // console.log(keypress);
-        keypress.splice(secretCode.length-1, userCode - secretCode.length);
-        // console.log(userCode)
+    $(document).keyup(function(e){
+        console.log(e.keyCode)
+        userInput.push(e.keyCode);
+        if(konami[i] !== userInput[i]){
+            alert("not correct Konami Code")
+        } else if(konami[konami.length-1] === userInputkonami.length-1){
+            alert('correct Konami code -you get 30 Lives');
+        } else{
+            i++;
+        }
 
-        if(userCode.join(" ").includes(secretCode.join(" ")))
-            alert('You have added 30 lives');
-        $('body').css('background', 'red')
+
     });
 </script>
 

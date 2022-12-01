@@ -30,25 +30,30 @@
 
 
                     //Drops a marker at the new location
-                        let marker = new mapboxgl.Marker({color: 'crimson'})
+                        let marker = new mapboxgl.Marker({color: 'crimson',})
 
                         marker.setDraggable(coordinates)
                             .setLngLat([coordinates[0], coordinates[1]])
                             .addTo(map)
 
 
-                        marker.on('dragend', function onDragEnd() {
+
+                    marker.on('dragend', () => {
                             const lngLat = marker.getLngLat();
                             let coordinates = lngLat.toArray()
                             console.log(lngLat.toArray())
                             getWeatherData(coordinates)
-                            // console.log('Drag function:', 'lat:' + lngLat.lat, '/typeof: ' + typeof lngLat.lat, '/lng:' + lngLat.lng, '/typeof: ' + typeof lngLat.lng);
+                            console.log('Drag function:', 'lat:' + lngLat.lat, '/typeof: ' + typeof lngLat.lat, '/lng:' + lngLat.lng, '/typeof: ' + typeof lngLat.lng);
                         });
+
+
 
                         //Relay coordinates to weatherData
                         getWeatherData(coordinates)
                 });
         });
+
+
 
 
     function getWeatherData(coordinates) {
@@ -63,7 +68,7 @@
 
             //appending the weather
             let forecasts = data.list
-            console.log("Data List: ", data.list)
+            // console.log("Data List: ", data.list)
             let appendedForecast = append(forecasts);
             $('#weather').html(appendedForecast);
             // console.log("forecast: ", forecasts)
