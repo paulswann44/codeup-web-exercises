@@ -43,22 +43,34 @@ console.log('problem #2' , userLanguages);
 
 //#3
 //Use .map to create an array of strings where each element is a user's email address
+//map allows to mutate an array
 let userEmails = users.map((user) => user.email)
 console.log('problem #3', userEmails);
 
 //#4
 // Use .reduce to get the total years of experience from the list of users. Once you get the total of years you can use the result to calculate the average.
-let userYears = users.reduce((previousValue, currentValue)=> previousValue + currentValue.yearsOfExperience, 0)
-console.log('problem#4', userYears)
+let userYears = users.reduce((accumulator, currentValue)=> accumulator + currentValue.yearsOfExperience, 0)
+console.log('problem #4A', userYears);
+
+let average = userYears / users.length
+console.log('problem #4B', average);
+
+
+//accumulator = total
 
 //#5
- let userLongEmail  = users.reduce((previousValue,currentValue) =>{
-        if (currentValue.email.length > previousValue.length){
-            previousValue = currentValue.email
+//Use .reduce to get the longest email from the list of users.
+ let userLongEmail  = users.reduce((longestEmail,currentEmail) =>{
+        if (currentEmail.email.length > longestEmail.length){
+            longestEmail = currentEmail.email
         }
-        return previousValue
+        return longestEmail
     }
-    ,'')
+    ,'');
+
+
+
+
 console.log('problem #5', userLongEmail);
 
 //#6
@@ -70,7 +82,7 @@ for (let i = 0; i < users.length; i++){
 console.log(arrayOfNames)
 
 let listOfUsersNames = arrayOfNames.reduce((previousValue,currentValue) => {
-    console.log('Problem 6: Your instructors are: ' + arrayOfNames.join(', '))
+    console.log('Problem #6: Your instructors are: ' + arrayOfNames.join(', '))
 })
 
 
