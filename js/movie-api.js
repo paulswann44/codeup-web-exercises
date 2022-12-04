@@ -11,18 +11,19 @@ const movieKey = MOVIE_API
 * */
 
 //Btn search by either value of the search, title, year, or plot.
-$('#submit-btn').click(() => {
-    // event.preventDefault();
-    let search = $('#search').val
-    // let year = $('#year').val
-    // let plot = $('#plot').val
-    // let type = $('#type').val
-    // getMovie(search, year, plot, type); //It will trigger the getMovies Function
-    getMovies(search); //It will trigger the getMovies Function
-    console.log(search)
+$('#submit-btn').click((event) => {
+    event.preventDefault();
+    let search = $('#search').val()
+    let year = $('#year').val()
+    let type = $('#type').val()
+    let plot = $('#plot').val()
+    console.log('search: ', search)
+    console.log('year: ', year)
+    console.log('type: ', type)
+    console.log('plot: ', plot)
+    getMovies(search, year, type, plot); //It will trigger the getMovies Function
+
 });
-
-
 
 
 /*PART (2)
@@ -53,50 +54,30 @@ $('#reset-btn').click(() => location.reload());
 * https://codepen.io/Manoz/pen/kyWvQw
 * */
 
-const getMovies = (search) => {
-    let loader = `<div class="boxLoading"></div>`;
-    document.getElementById('movieResult').innerHTML = loader;
-//     // fetch(`http://www.omdbapi.com/?apikey=${movieKey}&s=${search}&y=${year}&plot=${plot}&${type}`)
-    fetch(`http://www.omdbapi.com/?apikey=${movieKey}&s=${search}`)
+const getMovies = (search, year, type, plot) => {
+    fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}&y=${year}&t=${plot}&type=${type}`) //search is the problem
         .then(response => response.json())//then... return json
         .then(function (data) { //then return data
-            console.log(data)
-            data.forEach(movies()=>{
-                const {{Poster, Title, Year, imdbID, Genre}}
-                <ul>
-
-                </ul>
-            // })
-
+            console.log('data', data); //nothing appears
+            let movies = response.data.Search
+            console.log('movies: ', movies);
+            movies.forEach((movie) => {
+                const {Title, Year, imdbID, Type, Poster} = movie;
+                results +=
+                    `<div>
+                         <h1>Movie name: ${Title}</h1>
+                         <p>Movie Year: ${Year}</p>
+                         <img src="${Poster}" alt="${Title}">
+                 </div>`;
+            })
+            $('#movies').html(results)
         })
-
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 
-// const movieApiMovies = () => {
-//     let loader = `<div class="boxLoading"></div>`;
-//     document.getElementById('movieResult').innerHTML = loader;
-//     fetch(movieApi_url + "movies/")
-//         .then(response => response.json())
-//         .then(function (data) {
-//             let result = `<h2> Movies I've watched! </h2>`;
-//             data.forEach((movie) => {
-//                 const {id, name, year, note_imdb, genre, duration} = movie;
-//                 result +=
-//                     `<div>
-//                     <h5> Movie ID: ${id} </h5>
-//                     <ul>
-//                         <li>Movie name: ${name}</li>
-//                         <li>Movie year: ${year}</li>
-//                         <li>Movie note on IMDB: ${note_imdb}</li>
-//                         <li>Movie Genre: ${genre}</li>
-//                         <li>Movie duration: ${duration}</li>
-//                     </ul>
-//                 </div>`;
-//                 document.getElementById('movieResult').innerHTML = result;
-//             })
-//         })
-// };
 
 
 /*PART (4)
