@@ -2,26 +2,17 @@
 * Any prerequisite functions/keys/variables
 * */
 
-const movieKey = MOVIE_API
+const movieKey = MOVIE_API //
 
 
 /*PART (1)
-* Detail: GetElementbyID for the values from the Search Bar. Either via Jquery or Element Selector
-*
 * */
 
 //Btn search by either value of the search, title, year, or plot.
 $('#submit-btn').click((event) => {
     event.preventDefault();
     let search = $('#search').val()
-    let year = $('#year').val()
-    let type = $('#type').val()
-    let plot = $('#plot').val()
-    console.log('search: ', search)
-    console.log('year: ', year)
-    console.log('type: ', type)
-    console.log('plot: ', plot)
-    getMovies(search, year, type, plot); //It will trigger the getMovies Function
+    getMovies(search);
 
 });
 
@@ -50,39 +41,65 @@ $('#reset-btn').click(() => location.reload());
 * (3) Loading screen
 * https://stackoverflow.com/questions/53799108/how-to-add-a-loading-animation-while-fetch-data-from-api-vanilla-js
 *
-* (4)
-* https://codepen.io/Manoz/pen/kyWvQw
 * */
 
-const getMovies = (search, year, type, plot) => {
-    fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}&y=${year}&t=${plot}&type=${type}`) //search is the problem
+//VERSION #1
+// const getMovies = (search) => {
+//     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
+//         .then(response => response.json())//then... return json
+//         .then(function (data) { //then return data
+//             console.log('data', data);
+//
+//             let results = ``;
+//             data.forEach( movie => {
+//                 const {Title, Year, imdbID, Type, Poster} = movie;
+//                 results +=
+//                     `<div>
+//                          <p>Movie name: ${Title}</p>
+//                  </div>`;
+//
+//
+//
+//             })
+//             $('#movies').html(results)  //I want to take the results and place it in the div w/ ID of movies
+//         })
+//         .catch((error) => {
+//             // console.log(error);
+//         })
+// }
+
+//VERSION #2
+const getMovies = (search) => {
+    fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
         .then(response => response.json())//then... return json
         .then(function (data) { //then return data
-            console.log('data', data); //nothing appears
-            let movies = response.data.Search
-            console.log('movies: ', movies);
-            movies.forEach((movie) => {
-                const {Title, Year, imdbID, Type, Poster} = movie;
-                results +=
-                    `<div>
-                         <h1>Movie name: ${Title}</h1>
-                         <p>Movie Year: ${Year}</p>
-                         <img src="${Poster}" alt="${Title}">
-                 </div>`;
-            })
-            $('#movies').html(results)
+            console.log('data', data);
+
+            let movie = data.Search;
+            let appendMovies = append(movie)
+            $('#append-movies').html(appendMovies)  //I want to take the results and place it in the div w/ ID of movies
         })
         .catch((error) => {
-            console.log(error)
+            console.log(error);
         })
+}
+
+let append = function (data) {
+    let html = ``
+    for (let i = 0; i < data.length; i++) {
+        console.log("Data: ", data[i])
+        const {Title, Year} = data[i]
+        html += `<div>
+                         <p>Movie name: ${Title}</p>
+                         <p>Movie Year: ${Year}</p>
+            
+            </div>`
+    }
+    return html
 }
 
 
 
-
-/*PART (4)
-* A function to render results
-* */
 
 
 /*
