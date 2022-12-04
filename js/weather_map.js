@@ -42,7 +42,7 @@
                             const lngLat = marker.getLngLat();
                             let coordinates = lngLat.toArray()
                             console.log(lngLat.toArray())
-                            getWeatherData(coordinates)
+                            // getWeatherData(coordinates)
                             console.log('Drag function:', 'lat:' + lngLat.lat, '/typeof: ' + typeof lngLat.lat, '/lng:' + lngLat.lng, '/typeof: ' + typeof lngLat.lng);
                         });
 

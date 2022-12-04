@@ -109,14 +109,9 @@ main {
     background-color: var(--bg-3);
 }
 
-.card:hover {
-    animation: bounce 20s ease-in infinite;
-}
 
-@keyframes bounce {
-    0%   { transform: translateY(-80px); }
-    100%  { transform: translateY(-80px); }
-}
+
+
 
 
 
