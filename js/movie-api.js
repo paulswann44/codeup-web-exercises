@@ -5,7 +5,7 @@
 const movieKey = MOVIE_API //
 
 
-/*PART (1)
+/*PART (1) -button to get movies from omdbapi
 * */
 
 //Btn search by either value of the search, title, year, or plot.
@@ -18,57 +18,32 @@ $('#submit-btn').click((event) => {
 
 
 /*PART (2)
-* Reset Button
-* Might have to store to local storage
+* maybe create a function that changes the method that updates options.
+*
  */
-
-$('#reset-btn').click(() => location.reload());
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+};
 
 
 /*PART (3)
+* maybe create a function that renders a loading animation
+*BONUS
+ */
+
+
+
+
+/*PART (4)
 * Fetch API to derive Search results
-*
-* (1)
-* 's' is required for search under the documentation
-* 't' is optional for title
-* 'y' is optional for year
-* 'p' is optional for plot
-* 'type' is optional for type
-*
-* (2) Load example for fetch
-* https://codepen.io/vaishnav21/pen/ExgVNXY
-*
-* (3) Loading screen
-* https://stackoverflow.com/questions/53799108/how-to-add-a-loading-animation-while-fetch-data-from-api-vanilla-js
 *
 * */
 
-//VERSION #1
-// const getMovies = (search) => {
-//     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
-//         .then(response => response.json())//then... return json
-//         .then(function (data) { //then return data
-//             console.log('data', data);
-//
-//             let results = ``;
-//             data.forEach( movie => {
-//                 const {Title, Year, imdbID, Type, Poster} = movie;
-//                 results +=
-//                     `<div>
-//                          <p>Movie name: ${Title}</p>
-//                  </div>`;
-//
-//
-//
-//             })
-//             $('#movies').html(results)  //I want to take the results and place it in the div w/ ID of movies
-//         })
-//         .catch((error) => {
-//             // console.log(error);
-//         })
-// }
 
-//VERSION #2
 const getMovies = (search) => {
     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
         .then(response => response.json())//then... return json
@@ -86,13 +61,14 @@ const getMovies = (search) => {
 
 let append = function (data) {
     let html = ``
-    for (let i = 0; i < data.length; i++) {
+    for (let i in data) {
         console.log("Data: ", data[i])
-        const {Title, Year} = data[i]
+        const {Title, Year, Poster, imdbID, Type} = data[i]
         html += `<div>
+                         <img src="${Poster}">
                          <p>Movie name: ${Title}</p>
                          <p>Movie Year: ${Year}</p>
-            
+                 
             </div>`
     }
     return html
