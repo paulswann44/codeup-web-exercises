@@ -16,54 +16,51 @@
             type="text/css"
     />
     <style>
-        .button {
-            background-color: #008cba; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
+        /* Styles for the body element */
+        body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            background: #000;
+            animation: star-animation 200s linear infinite;
         }
-        .button:disabled {
-            opacity: 0.5;
+
+        /* Styles for the star pseudo-elements */
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            height: 120%;
+            width: 120%;
         }
-        .hide {
-            display: none;
+
+        /* Keyframes for the star animation */
+        @keyframes star-animation {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(800px);
+            }
         }
+
+
+
     </style>
 </head>
 <body>
-<h1>
-    Adding loading spinner for buttons in jquery for ajax call
-</h1>
 
-<button class="button">
-    <i class="loading-icon fa fa-spinner fa-spin hide"></i>
-    <span class="btn-txt">Fetch Data from Server</span>
-</button>
 
-<div class="result"></div>
 
+<div id="footer">
+    <p>This is the lava lamp footer</p>
+</div>
 <script>
-    $(document).ready(function() {
-        $(".button").on("click", function() {
-            $(".result").text("");
-            $(".loading-icon").removeClass("hide");
-            $(".button").attr("disabled", true);
-            $(".btn-txt").text("Press me!");
 
-            $.get("https://jsonplaceholder.typicode.com/posts", function(data) {
-                $(".result").html(JSON.stringify(data));
-                $(".loading-icon").addClass("hide");
-                $(".button").attr("disabled", false);
-                $(".btn-txt").text("Your result!");
-            });
-        });
-    });
+
+
 </script>
 </body>
 </html>

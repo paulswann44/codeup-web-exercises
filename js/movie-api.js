@@ -2,13 +2,16 @@
 * Any prerequisite functions/keys/variables
 * */
 
-const movieKey = MOVIE_API //
+const movieKey = MOVIE_API
+let hideLoading = $('.lds-ring').hide();
+const shoppingCart = [];
+// console.log('shopping cart:', shoppingCart)
 
 
-/*PART (1) -button to get movies from omdbapi
-* */
 
-//Btn search by either value of the search, title, year, or plot.
+
+
+//This is a function that stores the input value
 $('#submit-btn').click((event) => {
     event.preventDefault();
     let search = $('#search').val()
@@ -17,47 +20,37 @@ $('#submit-btn').click((event) => {
 });
 
 
-/*PART (2)
-* maybe create a function that changes the method that updates options.
-*
- */
-const options = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(),
-};
+
+//Loading animation
+const loadingAnimation = () => {
+    $('.lds-ring').show();
+    setTimeout(function () {
+        $('.lds-ring').hide();
+    }, 10000);
+}
 
 
-/*PART (3)
-* maybe create a function that renders a loading animation
-*BONUS
- */
-
-
-
-
-/*PART (4)
-* Fetch API to derive Search results
-*
-* */
 
 
 const getMovies = (search) => {
+    loadingAnimation()
     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
         .then(response => response.json())//then... return json
         .then(function (data) { //then return data
             console.log('data', data);
-
+            loadingAnimation()
             let movie = data.Search;
             let appendMovies = append(movie)
             $('#append-movies').html(appendMovies)  //I want to take the results and place it in the div w/ ID of movies
+            addToCart(data)
         })
         .catch((error) => {
+            loadingAnimation()
             console.log(error);
         })
 }
+
+
 
 let append = function (data) {
     let html = ``
@@ -65,15 +58,27 @@ let append = function (data) {
         console.log("Data: ", data[i])
         const {Title, Year, Poster, imdbID, Type} = data[i]
         html += `<div>
+            <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> <br>
                          <img src="${Poster}">
-                         <p>Movie name: ${Title}</p>
+                         <h5> ${Title}</h5>
                          <p>Movie Year: ${Year}</p>
-                 
+                         <p>price is $2.99</p>
+           <button type="button" class="btn" id="addToCart" onclick="addToArray()">Add Movie</button> <br>
+           <button type="button" class="btn" id="addToWishList">Add to wishlist</button> <br>
+
+
             </div>`
+        function addToArray() {
+            movieArray.push(data[i])
+        }
     }
     return html
 }
 
+
+// function addToCart (data){
+//     shoppingCart.push()
+// }
 
 
 
