@@ -4,11 +4,6 @@
 
 const movieKey = MOVIE_API
 let hideLoading = $('.lds-ring').hide();
-const shoppingCart = [];
-// console.log('shopping cart:', shoppingCart)
-
-
-
 
 
 //This is a function that stores the input value
@@ -20,7 +15,6 @@ $('#submit-btn').click((event) => {
 });
 
 
-
 //Loading animation
 const loadingAnimation = () => {
     $('.lds-ring').show();
@@ -30,19 +24,24 @@ const loadingAnimation = () => {
 }
 
 
-
-
 const getMovies = (search) => {
     loadingAnimation()
     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
         .then(response => response.json())//then... return json
         .then(function (data) { //then return data
-            console.log('data', data);
+            // console.log('data', data);
             loadingAnimation()
+
+
             let movie = data.Search;
+            console.log('data.Search: ', data.Search)
+            let newMovies = movie.map(obj => obj.Title)
+
+
             let appendMovies = append(movie)
             $('#append-movies').html(appendMovies)  //I want to take the results and place it in the div w/ ID of movies
-            addToCart(data)
+
+
         })
         .catch((error) => {
             loadingAnimation()
@@ -51,49 +50,37 @@ const getMovies = (search) => {
 }
 
 
+// This allows me to get the value from the fetc
+const dataOfMovies = (newMovies) => {
+    let movieCart = newMovies
+    console.log('movie cart:', movieCart)
+}
 
-let append = function (data) {
+
+const append = function (data) {
     let html = ``
     for (let i in data) {
-        console.log("Data: ", data[i])
-        const {Title, Year, Poster, imdbID, Type} = data[i]
-        html += `<div>
-            <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> <br>
+        // console.log("Data: ", data[i])
+        const {Title, Year, Poster} = data[i]
+        html += `<div class="container parent${i++} " id="parent${i++}">
+            <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> 
                          <img src="${Poster}">
                          <h5> ${Title}</h5>
                          <p>Movie Year: ${Year}</p>
                          <p>price is $2.99</p>
-           <button type="button" class="btn" id="addToCart" onclick="addToArray()">Add Movie</button> <br>
-           <button type="button" class="btn" id="addToWishList">Add to wishlist</button> <br>
-
-
+           <button type="button" class="btn" id="addToCart" onclick="addToCart('${Title}','${Year}')">Add Movie</button>  
             </div>`
-        function addToArray() {
-            movieArray.push(data[i])
-        }
+
+
     }
     return html
 }
 
-
-// function addToCart (data){
-//     shoppingCart.push()
-// }
-
+function addToCart(a,b) {
+    console.log(a,b)
+}
 
 
 
-/*
-* NOTES:
-*
-* (1)  API Follow Along
-* https://www.youtube.com/watch?v=67eJTr6_ylY
-*
-* (2) API WEBSITE
-* https://www.omdbapi.com/
-*
-*
-* (4) Maybe as a substitute for background
-* https://codepen.io/sarazond/pen/LYGbwj
-*
-* */
+
+
