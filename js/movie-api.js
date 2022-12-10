@@ -7,7 +7,7 @@ let hideLoading = $('.lds-ring').hide();
 
 
 //URL for the glitch database
-const url = "https://axiomatic-private-utahceratops.glitch.me/movies";
+const url = "https://axiomatic-private-utahceratops.glitch.me/movies/";
 
 //This gets the live and accurate update of the POST request from glitch
 fetch(url).then(res => res.json()).then(data => console.log(data));
@@ -22,19 +22,16 @@ $('#submit-btn').click((event) => {
 });
 
 
-//Loading animation
-// const loadingAnimation = () => {
-//     $('.lds-ring').show();
-//     setTimeout(function () {
-//     }, 5000);
-// }
-
+//loading animation
 function loadingAnimation() {
     document.querySelector('.lds-ring').style.display = 'block';
     setTimeout(function() {
         document.querySelector('.lds-ring').style.display = 'none';
     }, 5000);
 }
+
+
+
 
 //Get request to the omdb API
 const getMovies = async (search) => {
@@ -69,13 +66,13 @@ const append = function (data) {
         // console.log("Data: ", data[i])
         const {Title, Year, Poster} = data[i]
         html += `<div class="row">
-<div class="container parent col-md-3 card m-0" id="parent">
+<div class="container parent col-md card" id="parent">
             <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> 
                          <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
 
                          
-           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}');parentNode.remove()">Add Movie</button>  
+           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}')">Add Movie</button>  
             </div></div>`
 
 
@@ -87,7 +84,8 @@ const append = function (data) {
 * This creates the cart where it stores the value of the array
 * Might or might not be useful
 * */
-let cart = [];
+
+
 
 const addToCart = (title, year, poster) => {
     let item = {
@@ -103,33 +101,18 @@ const addToCart = (title, year, poster) => {
 }
 
 
-
-// function uploadMovie() {
-//     let movieTitle = document.getElementById('title').value;
-//     let movieYear = document.getElementById('year').value;
-//     movieYear = Number(movieYear);
-//     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
-//         // If the year is not a valid value, show an error message
-//         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
-//     } else {
-//     console.log(`title: ${movieTitle} year: ${movieYear}`)
-// }
-
-
-
-// document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
-
     function uploadMovie() {
         // Get the values of the title and year inputs
-        var movieTitle = document.getElementById('title').value;
-        var movieYear = document.getElementById('year').value;
+        let movieTitle = document.getElementById('title').value;
+        let movieYear = document.getElementById('year').value;
+        let movieComment = 'This movie was uploaded by independent content creator';
 
         if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
             alert('Invalid year! Please enter a whole number between 1900 and 2023.');
         } else {
             // If the year is a valid value, you can now use the movieTitle and movieYear variables to do whatever you want with the movie title and year, such as displaying them on the page or sending them to a server.
-            postMovie(movieTitle, movieYear)
+            postMovie(movieTitle, movieYear,'',movieComment)
         }
         console.log(`${movieTitle}`)
         console.log(`${movieYear}`)
@@ -140,9 +123,9 @@ const addToCart = (title, year, poster) => {
 
 
 
-    const postMovie = (title, year) =>{
-    console.log(title, year)
-    const movieObj = {title: title, year: year, comment:'This movie was uploaded by independent content creator'};
+    const postMovie = (title, year, poster, comment) =>{
+    console.log(title, year, poster, comment)
+    const movieObj = {title: title, year: year, poster: poster, comment:'This movie was uploaded by independent content creator'};
     const option =   {
         method: 'POST',
         headers: {
@@ -162,9 +145,57 @@ const addToCart = (title, year, poster) => {
         })
 
 }
-// let post= document.getElementById('new-movie');
-// post.addEventListener('submit', postMovie);
 
+ function putMovie (id) {
+    id.preventDefault()
+
+    console.log("hello")
+    // movie.preventDefault()
+    const movieObj = {title: "Hello", body: '3'}
+    const option =   {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movieObj),
+    };
+    console.log('put option', option)
+    fetch(`${url}${id}`, option)
+        .then(response => response.json())
+        .then(function (data) {
+            alert('movie was good to watch')
+            console.log('data', data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
+}
+
+
+
+function deleteMovie(id) {
+    const movieObj = {title: "Hello", body: '1'}
+    const option = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movieObj),
+    };
+    console.log('delete option', option)
+    fetch(`${url}${id}`, option)
+    // fetch(url, option)
+        .then(response => response.json())
+        .then(function (data) {
+            // alert(`was deleted`)
+            console.log(' delete data', data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
+}
 
 
 
