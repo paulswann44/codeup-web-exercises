@@ -173,7 +173,7 @@ const addToCart = (title, year, poster) => {
 
 
 /*
-* (1) POST ADDed MOVIES TO THE DATABASE/GLITCH
+*
 * (2) CREATE A MODAL THAT POP-UP'S FOR CHECK OUT (PUT)
 *                   (A) Can Edit the order quantity (PATCH)
 *                   (B) Calculate subtotal and total
