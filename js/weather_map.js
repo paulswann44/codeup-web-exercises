@@ -108,7 +108,7 @@
                 <div class="d-flex justify-content-around" >
                 <p class="card-text mb-0 text-warning pe-1"> H: ${temp_max.toFixed(1)}ºF </p>
                 <p class="card-text mb-0 text-warning" > L: ${temp_min.toFixed(1)}ºF</p>
-                </div>
+                </div> 
               </div>
               <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item humidity">Humidity: ${humidity}%</li>

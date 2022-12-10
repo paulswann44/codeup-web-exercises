@@ -5,10 +5,6 @@
 const movieKey = MOVIE_API
 let hideLoading = $('.lds-ring').hide();
 
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})
-
 
 //URL for the glitch database
 const url = "https://axiomatic-private-utahceratops.glitch.me/movies";
@@ -27,22 +23,29 @@ $('#submit-btn').click((event) => {
 
 
 //Loading animation
-const loadingAnimation = () => {
-    $('.lds-ring').show();
-    setTimeout(function () {
-        hideLoading;
-    }, 10000);
+// const loadingAnimation = () => {
+//     $('.lds-ring').show();
+//     setTimeout(function () {
+//     }, 5000);
+// }
+
+function loadingAnimation() {
+    document.querySelector('.lds-ring').style.display = 'block';
+    setTimeout(function() {
+        document.querySelector('.lds-ring').style.display = 'none';
+    }, 5000);
 }
 
-
 //Get request to the omdb API
-const getMovies = (search) => {
+const getMovies = async (search) => {
     loadingAnimation()
+    const response = await
     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
         .then(response => response.json())//then... return json
         .then(function (data) { //then return data
             // console.log('data', data);
-            loadingAnimation();
+            // loadingAnimation();
+
 
 
             let movie = data.Search;
@@ -65,16 +68,15 @@ const append = function (data) {
     for (let i in data) {
         // console.log("Data: ", data[i])
         const {Title, Year, Poster} = data[i]
-        html += `<div class="container parent${i++} " id="parent${i++} mt-5">
+        html += `<div class="row">
+<div class="container parent col-md-3 card m-0" id="parent">
             <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> 
-                         <img src="${Poster}">
-                         <h5> ${Title}</h5>
-                         <div>
-                         <p>Movie Year: ${Year}</p>
-                         <p>price is $2.99</p>
-                         </div>
-           <button type="button" class="btn" id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}');parentNode.remove()">Add Movie</button>  
-            </div>`
+                         <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
+                         <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
+
+                         
+           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}');parentNode.remove()">Add Movie</button>  
+            </div></div>`
 
 
     }
@@ -125,8 +127,8 @@ const postMovie = movie =>{
         })
 
 }
-let post= document.getElementById('new-movie');
-post.addEventListener('submit', postMovie);
+// let post= document.getElementById('new-movie');
+// post.addEventListener('submit', postMovie);
 
 
 

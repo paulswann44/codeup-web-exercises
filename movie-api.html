@@ -14,84 +14,92 @@
 </head>
 
 <div>
-<nav class="navbar navbar-dark bg-dark fixed-top mb-3">
-    <div class="container-fluid">
-        <img src="img/free-movie-icon.png" id='logo' alt="logo">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">FREE MOVIES</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#modal-cart">View Your Cart</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#modal-add">Upload a Movie</a>
+    <nav class="navbar navbar-dark bg-dark fixed-top mb-3">
+        <div class="container-fluid">
+            <img src="img/free-movie-icon.png" id='logo' alt="logo">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                 aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">FREE MOVIES</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#modal-cart">View Your Cart</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#modal-add">Upload a Movie</a>
 
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2 search-subjects" type="search" placeholder="Search" aria-label="Search" id='search'>
-                    <button class="btn btn-success" id='submit-btn' type="submit">Search</button>
-                </form>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2 search-subjects" type="search" placeholder="Search"
+                               aria-label="Search" id='search'>
+                        <button class="btn btn-success" id='submit-btn' type="submit">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </div>
 
-
+<!--MODAL ONE-PATCH QUANTITY-->
 
 <div id="modal-cart" class="modal">
     <div class="modal-content">
-        <h1>CSS Only Modal</h1>
+        <h1 class="d-flex justify-content-center">Let's Checkout!</h1>
 
-        <p>
-            One Modal
-        </p>
-        <button>Add Content</button>
-
+        <p><strong>(1) </strong>I WANT TO RENDER CART </p>
+        <p><strong>(2) </strong>EDIT BTN FOR PATCH </p>
+        <p><strong>(3) </strong>QUANTITY </p>
+        <p><strong>(4) </strong>DELETE BTN </p>
+        <button type="button" class="btn btn-primary">Add Content</button>
 
 
         <a href="#" class="modal-close">&times;</a>
     </div>
 </div>
+
+
+<!--MODAL ONE - POST CONTENT ONLY-->
 
 <div id="modal-add" class="modal">
     <div class="modal-content">
-        <h1>CSS Only Modal</h1>
+        <h1 class="d-flex justify-content-center">Add a Movie</h1>
 
-        <p>
-            two Modal
-        </p>
-        <button>Add Content</button>
+        <p>For Independent Content Creators: </p>
+        <input type="text" class="new-movie mb-2" id="title" placeholder="Title"> <!--Title-->
+        <input type="text" class="new-movie mb-2" id="year" placeholder="Year"> <!--Year-->
+        <label for="upload">Choose a profile picture:</label>
 
+        <!--disabled because not trying to really upload a file on a front-end project-->
+        <input type="file" class="mb-2" disabled
+               id="upload" name="upload"
+               accept="video/*">
+        <button type="button" class="btn btn-primary btn-lg">Add Content</button>
 
 
         <a href="#" class="modal-close">&times;</a>
     </div>
 </div>
-
-
-
-
 
 
 <!--Render Movies-->

@@ -4,6 +4,10 @@
     width: 70px;
 }
 
+nav {
+    position: sticky;
+    top: 0;
+}
 /*.search-subjects {*/
 
 /*    border: 3px solid #000;*/
@@ -21,28 +25,28 @@
 /*}*/
 
 /*SEARCH*/
-.search-subjects:focus{
-    border: 3px solid #5551ff;
+/*.search-subjects:focus{*/
+/*    border: 3px solid #5551ff;*/
 
-}
+/*}*/
 
-.selector{
-    border: 3px solid #000;
-    border-radius: 5px;
-    height: 50px;
-    line-height: normal;
-    color: #282828;
-    box-sizing: border-box;
-    user-select: auto;
-    font-size: 16px;
-    padding: 0 6px;
-    padding-left: 12px;
+/*.selector{*/
+/*    border: 3px solid #000;*/
+/*    border-radius: 5px;*/
+/*    height: 50px;*/
+/*    line-height: normal;*/
+/*    color: #282828;*/
+/*    box-sizing: border-box;*/
+/*    user-select: auto;*/
+/*    font-size: 16px;*/
+/*    padding: 0 6px;*/
+/*    padding-left: 12px;*/
 
-}
-.selector:hover{
-    border: 3px solid #5551ff;
+/*}*/
+/*.selector:hover{*/
+/*    border: 3px solid #5551ff;*/
 
-}
+/*}*/
 
 
 .movies{
@@ -144,4 +148,16 @@
     right: 10px;
     color: #585858;
     text-decoration: none;
+}
+
+.parent{
+
+}
+
+/*cards*/
+.year{
+    font-size: 1rem;
+    padding-top: 3px;
+    color: rgba(0, 0, 0, 0.7);
+
 }
