@@ -5,6 +5,11 @@
 const movieKey = MOVIE_API
 let hideLoading = $('.lds-ring').hide();
 
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
+
+
 //URL for the glitch database
 const url = "https://axiomatic-private-utahceratops.glitch.me/movies";
 
@@ -25,7 +30,7 @@ $('#submit-btn').click((event) => {
 const loadingAnimation = () => {
     $('.lds-ring').show();
     setTimeout(function () {
-        $('.lds-ring').hide();
+        hideLoading;
     }, 10000);
 }
 
@@ -125,10 +130,9 @@ post.addEventListener('submit', postMovie);
 
 
 
-// Listen for clicks on the "Checkout" button
-document.getElementById("checkout").addEventListener("click", openModal);
-// Listen for clicks on the "Close" button
-document.getElementById("close-modal").addEventListener("click", closeModal);
+
+
+
 
 
 /*
@@ -139,3 +143,7 @@ document.getElementById("close-modal").addEventListener("click", closeModal);
 *                   (C) Input that puts in special code to get 20% discount
 *                   (D) DELETE MOVIES FROM THE LIST
 * */
+
+
+
+
