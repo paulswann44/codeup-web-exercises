@@ -34,7 +34,7 @@ const getMovies = (search) => {
 
 
             let movie = data.Search;
-            console.log('data.Search: ', data.Search)
+            // console.log('data.Search: ', data.Search)
             let newMovies = movie.map(obj => obj.Title)
 
 
@@ -50,13 +50,6 @@ const getMovies = (search) => {
 }
 
 
-// This allows me to get the value from the fetc
-const dataOfMovies = (newMovies) => {
-    let movieCart = newMovies
-    console.log('movie cart:', movieCart)
-}
-
-
 const append = function (data) {
     let html = ``
     for (let i in data) {
@@ -68,7 +61,7 @@ const append = function (data) {
                          <h5> ${Title}</h5>
                          <p>Movie Year: ${Year}</p>
                          <p>price is $2.99</p>
-           <button type="button" class="btn" id="addToCart" onclick="addToCart('${Title}','${Year}')">Add Movie</button>  
+           <button type="button" class="btn" id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}');parentNode.remove()">Add Movie</button>  
             </div>`
 
 
@@ -76,10 +69,24 @@ const append = function (data) {
     return html
 }
 
-function addToCart(a,b) {
-    console.log(a,b)
-}
+/*
+* This creates the cart where it stores the value of the array
+*
+* */
+let cart = [];
 
+function addToCart(title, year, poster) {
+    let item = {
+        title: title,
+        year: year,
+        poster: poster
+
+    };
+    cart.push(item);
+    console.log('cart', cart)
+    console.log(cart.length)
+
+}
 
 
 
