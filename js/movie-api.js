@@ -104,10 +104,45 @@ const addToCart = (title, year, poster) => {
 
 
 
-const postMovie = movie =>{
-    console.log(movie)
-    movie.preventDefault()
-    const movieObj = movie;
+// function uploadMovie() {
+//     let movieTitle = document.getElementById('title').value;
+//     let movieYear = document.getElementById('year').value;
+//     movieYear = Number(movieYear);
+//     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
+//         // If the year is not a valid value, show an error message
+//         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
+//     } else {
+//     console.log(`title: ${movieTitle} year: ${movieYear}`)
+// }
+
+
+
+// document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
+
+    function uploadMovie() {
+        // Get the values of the title and year inputs
+        var movieTitle = document.getElementById('title').value;
+        var movieYear = document.getElementById('year').value;
+
+        if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
+
+            alert('Invalid year! Please enter a whole number between 1900 and 2023.');
+        } else {
+            // If the year is a valid value, you can now use the movieTitle and movieYear variables to do whatever you want with the movie title and year, such as displaying them on the page or sending them to a server.
+            postMovie(movieTitle, movieYear)
+        }
+        console.log(`${movieTitle}`)
+        console.log(`${movieYear}`)
+    }
+
+
+    document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
+
+
+
+    const postMovie = (title, year) =>{
+    console.log(title, year)
+    const movieObj = {title: title, year: year, comment:'This movie was uploaded by independent content creator'};
     const option =   {
         method: 'POST',
         headers: {

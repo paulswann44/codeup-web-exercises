@@ -86,15 +86,15 @@
         <h1 class="d-flex justify-content-center">Add a Movie</h1>
 
         <p>For Independent Content Creators: </p>
-        <input type="text" class="new-movie mb-2" id="title" placeholder="Title"> <!--Title-->
-        <input type="text" class="new-movie mb-2" id="year" placeholder="Year"> <!--Year-->
-        <label for="upload">Choose a profile picture:</label>
+        <input type="text" class="new-movie mb-2" id="title" placeholder="Title">
+        <input type="number" inputmode="numeric" id='year'placeholder="YYYY" min="1900" max="2023">
+        <label for="upload">Choose your movie:</label>
 
         <!--disabled because not trying to really upload a file on a front-end project-->
         <input type="file" class="mb-2" disabled
                id="upload" name="upload"
                accept="video/*">
-        <button type="button" class="btn btn-primary btn-lg">Add Content</button>
+        <button type="button" class="btn btn-primary btn-lg" id="uploadMovie">Add Content</button>
 
 
         <a href="#" class="modal-close">&times;</a>
