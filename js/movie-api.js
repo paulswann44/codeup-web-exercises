@@ -1,3 +1,4 @@
+
 /*PART (0)
 * Any prerequisite functions/keys/variables
 * */
@@ -7,8 +8,7 @@ let hideLoading = $('.lds-ring').hide();
 
 
 //URL for the glitch database
-// const url = "https://clover-everlasting-servant.glitch.me/movies/";
-const url = "https://tame-saber-splash.glitch.me/movies/";
+const url = "https://spiny-irradiated-orchestra.glitch.me/movies/";
 
 //This gets the live and accurate update of the POST request from glitch
 fetch(url).then(res => res.json()).then(data => console.log(data));
@@ -19,6 +19,7 @@ $('#submit-btn').click((event) => {
     event.preventDefault();
     let search = $('#search').val()
     getMovies(search);
+    // postInCart(search);
 
 });
 
@@ -44,10 +45,7 @@ const getMovies = async (search) => {
                 // console.log('data', data);
                 // loadingAnimation();
 
-
-
                 let movie = data.Search;
-
 
                 let appendMovies = append(movie);
                 $('#append-movies').html(appendMovies) ;
@@ -81,40 +79,22 @@ const append = function (data) {
     return html
 }
 
-/*
-* Using the array to imitate a database since this project is working use a database that is temperamental about
-* editing (glitch).  taking advantage of Async events
-* */
 
-// let cart =[];
-//
-// const addToCart = (title, year, poster) => {
-//     let item = {
-//         title: title,
-//         year: year,
-//         poster: poster
-//
-//     };
-//     cart.push(item);
-//     console.log('cart', cart);
-//     console.log(cart.length);
-//
-// }
 
 
 function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
-    let moviePoster = '<img src="../img/default-movie.png" alt="default">'
+    let moviePoster = '<img src="img/default-movie.png" alt="default">'
     let movieComment = 'This movie was uploaded by independent content creator';
 
     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        postMovie(movieTitle, movieYear,moviePoster,movieComment)
+        postMovie(movieTitle, movieYear,moviePoster)
         this.parentNode.remove();
-            alert('Thank you for your submission!');
+        alert('Thank you for your submission!');
     }
     console.log(`${movieTitle}`)
     console.log(`${movieYear}`)
@@ -203,23 +183,28 @@ function deleteMovie(id) {
 //This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
 //Glitch is terrible
 function resetDatabase(id) {
-    for (var i = 287; i <= 287; i++) {
+    for (var i = 281; i <= 291; i++) {
         deleteMovie([i])
 
     }
 }
 let reset = document.getElementById('deleteDatabase')
-    reset.addEventListener('click', resetDatabase);
+reset.addEventListener('click', resetDatabase);
 
+
+let selectedValues= [];
+console.log('selected values: ',selectedValues)
 
 function createCartElements(cart) {
     let renderCart = document.getElementById('renderCart');
 
-    for (let i = 0; i < cart.length; i++) {
+    for (let i = 2; i < cart.length; i++) {
         let item = cart[i];
+        console.log('item: ' , item)
 
         let card = document.createElement('div');
         card.className = 'card';
+
 
         let itemDiv = document.createElement('div');
         itemDiv.style.display = 'flex';
@@ -230,12 +215,18 @@ function createCartElements(cart) {
         poster.width = 50;
         poster.height = 50;
 
+
+
+
         let title = document.createElement('p');
         title.innerHTML = item.title;
 
-        let trashButton = document.createElement('button');
-        trashButton.innerHTML = 'delete me';
-        trashButton.className = 'trashDeleteBtn'
+
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = "name";
+        checkbox.value = item.id;
+        checkbox.id = "check";
 
 
 
@@ -243,27 +234,73 @@ function createCartElements(cart) {
         itemDiv.appendChild(title);
         card.appendChild(itemDiv);
         renderCart.appendChild(card);
-        itemDiv.appendChild(trashButton);
+        itemDiv.appendChild(checkbox);
+
+        // add an event listener to the checkbox that listens for a 'click' event
+        checkbox.addEventListener('click', function(event) {
+            // if the checkbox is checked, add its value to the selectedValues array
+            if (event.target.checked) {
+                selectedValues.push(event.target.value);
+            } else {
+                // if the checkbox is not checked, remove its value from the selectedValues array
+                let index = selectedValues.indexOf(event.target.value);
+                if (index > -1) {
+                    selectedValues.splice(index, 1);
+                }
+            }
+        });
+
     }
+
+
+};
+
+
+
+
+//this gets the current jason file
+const postInCart =  (search) => {
+    const response =
+        fetch(`${url}`)
+            .then(response => response.json())//then... return json
+            .then(function (data) { //then return data
+                console.log('cart data', data);
+                createCartElements(data)
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
 }
-
 let shoppingCartButton = document.getElementById('shoppingCart');
-
-shoppingCartButton.addEventListener('click', function() {
-    createCartElements(cart);
-});
-
+shoppingCartButton.addEventListener('click', postInCart);
 
 
 
 
 
 /*
-*
-* (1) new url so I am starting from a clean slate
-* (2) fix button to cart
-* (3) loading animation
-* (4) class="navbar-toggler-icon" hover rather than click (HAMBERGER MENU BTN)
-* (5) allow for POST, PATCH, DELETE
+*(1) I want to select the values into an array 'selectedValues'
+* (2) create a function named deleteChecks that accepts the array 'selected values and loops it
 *
 * */
+
+function deleteChecks(selectedValues) {
+    // get all elements with the class name 'remove'
+    let removeButtons = document.getElementsByClassName('remove');
+
+    // add an event listener to each 'remove' button that listens for a 'click' event
+    for (let i = 0; i < removeButtons.length; i++) {
+        removeButtons[i].addEventListener('click', function () {
+            // loop through the selectedValues array
+            for (let j = 0; j < selectedValues.length; j++) {
+                let value = selectedValues[j];
+                deleteMovie(value)
+
+            }
+        });
+    }
+}
+
+deleteChecks(selectedValues)
+
