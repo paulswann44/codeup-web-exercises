@@ -1,4 +1,3 @@
-
 /*PART (0)
 * Any prerequisite functions/keys/variables
 * */
@@ -27,12 +26,10 @@ $('#submit-btn').click((event) => {
 //loading animation
 function loadingAnimation() {
     document.querySelector('.lds-ring').style.display = 'block';
-    setTimeout(function() {
+    setTimeout(function () {
         document.querySelector('.lds-ring').style.display = 'none';
-    }, 5000);
+    }, 500);
 }
-
-
 
 
 //Get request to the omdb API
@@ -48,7 +45,7 @@ const getMovies = async (search) => {
                 let movie = data.Search;
 
                 let appendMovies = append(movie);
-                $('#append-movies').html(appendMovies) ;
+                $('#append-movies').html(appendMovies);
 
 
             })
@@ -69,17 +66,13 @@ const append = function (data) {
             <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> 
                          <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
-                         
-<!--           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}')">Add Movie</button>  -->
-           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>  
+                                    <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>  
             </div></div>`
 
 
     }
     return html
 }
-
-
 
 
 function uploadMovie() {
@@ -92,7 +85,7 @@ function uploadMovie() {
 
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        postMovie(movieTitle, movieYear,moviePoster)
+        postMovie(movieTitle, movieYear, moviePoster)
         this.parentNode.remove();
         alert('Thank you for your submission!');
     }
@@ -104,11 +97,15 @@ function uploadMovie() {
 document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
 
 
-
-const postMovie = (title, year, poster, comment) =>{
+const postMovie = (title, year, poster, comment) => {
     console.log(title, year, poster, comment)
-    const movieObj = {title: title, year: year, poster: poster, comment:'This movie was uploaded by independent content creator'};
-    const option =   {
+    const movieObj = {
+        title: title,
+        year: year,
+        poster: poster,
+        comment: 'This movie was uploaded by independent content creator'
+    };
+    const option = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -128,11 +125,11 @@ const postMovie = (title, year, poster, comment) =>{
 
 }
 
-function putMovie (id) {
+function putMovie(id) {
     id.preventDefault()
     console.log("hello")
     const movieObj = {title: "Hello", body: '3'}
-    const option =   {
+    const option = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -151,7 +148,6 @@ function putMovie (id) {
         })
 
 }
-
 
 
 function deleteMovie(id) {
@@ -188,19 +184,20 @@ function resetDatabase(id) {
 
     }
 }
+
 let reset = document.getElementById('deleteDatabase')
 reset.addEventListener('click', resetDatabase);
 
 
-let selectedValues= [];
-console.log('selected values: ',selectedValues)
+let selectedValues = [];
+console.log('selected values: ', selectedValues)
 
 function createCartElements(cart) {
     let renderCart = document.getElementById('renderCart');
 
-    for (let i = 2; i < cart.length; i++) {
+    for (let i = 3; i < cart.length; i++) {
         let item = cart[i];
-        console.log('item: ' , item)
+        console.log('item: ', item)
 
         let card = document.createElement('div');
         card.className = 'card';
@@ -216,8 +213,6 @@ function createCartElements(cart) {
         poster.height = 50;
 
 
-
-
         let title = document.createElement('p');
         title.innerHTML = item.title;
 
@@ -229,7 +224,6 @@ function createCartElements(cart) {
         checkbox.id = "check";
 
 
-
         itemDiv.appendChild(poster);
         itemDiv.appendChild(title);
         card.appendChild(itemDiv);
@@ -237,7 +231,7 @@ function createCartElements(cart) {
         itemDiv.appendChild(checkbox);
 
         // add an event listener to the checkbox that listens for a 'click' event
-        checkbox.addEventListener('click', function(event) {
+        checkbox.addEventListener('click', function (event) {
             // if the checkbox is checked, add its value to the selectedValues array
             if (event.target.checked) {
                 selectedValues.push(event.target.value);
@@ -256,10 +250,8 @@ function createCartElements(cart) {
 };
 
 
-
-
 //this gets the current jason file
-const postInCart =  (search) => {
+const postInCart = (search) => {
     const response =
         fetch(`${url}`)
             .then(response => response.json())//then... return json
@@ -274,9 +266,6 @@ const postInCart =  (search) => {
 }
 let shoppingCartButton = document.getElementById('shoppingCart');
 shoppingCartButton.addEventListener('click', postInCart);
-
-
-
 
 
 /*
@@ -295,12 +284,18 @@ function deleteChecks(selectedValues) {
             // loop through the selectedValues array
             for (let j = 0; j < selectedValues.length; j++) {
                 let value = selectedValues[j];
-                deleteMovie(value)
-
+                document.querySelector(`input[value="${value}"]`).parentElement.remove();
+                deleteMovie(value);
+                // $(".modal-content").remove();
             }
+
+
         });
     }
 }
 
-deleteChecks(selectedValues)
+
+deleteChecks(selectedValues);
+
+
 
