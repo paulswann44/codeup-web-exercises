@@ -37,26 +37,26 @@ function loadingAnimation() {
 const getMovies = async (search) => {
     loadingAnimation()
     const response = await
-    fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
-        .then(response => response.json())//then... return json
-        .then(function (data) { //then return data
-            // console.log('data', data);
-            // loadingAnimation();
+        fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
+            .then(response => response.json())//then... return json
+            .then(function (data) { //then return data
+                // console.log('data', data);
+                // loadingAnimation();
 
 
 
-            let movie = data.Search;
+                let movie = data.Search;
 
 
-            let appendMovies = append(movie);
-            $('#append-movies').html(appendMovies) ;
+                let appendMovies = append(movie);
+                $('#append-movies').html(appendMovies) ;
 
 
-        })
-        .catch((error) => {
-            loadingAnimation();
-            console.log(error);
-        })
+            })
+            .catch((error) => {
+                loadingAnimation();
+                console.log(error);
+            })
 }
 
 //Appends into a card when information if fetched
@@ -70,9 +70,9 @@ const append = function (data) {
             <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> 
                          <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
-
                          
            <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}')">Add Movie</button>  
+<!--           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}');postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>  -->
             </div></div>`
 
 
@@ -81,11 +81,11 @@ const append = function (data) {
 }
 
 /*
-* This creates the cart where it stores the value of the array
-* Might or might not be useful
+* Using the array to imitate a database since this project is working use a database that is temperamental about
+* editing (glitch).  taking advantage of Async events
 * */
 
-
+let cart =[];
 
 const addToCart = (title, year, poster) => {
     let item = {
@@ -101,29 +101,29 @@ const addToCart = (title, year, poster) => {
 }
 
 
-    function uploadMovie() {
-        // Get the values of the title and year inputs
-        let movieTitle = document.getElementById('title').value;
-        let movieYear = document.getElementById('year').value;
-        let movieComment = 'This movie was uploaded by independent content creator';
+function uploadMovie() {
+    let movieTitle = document.getElementById('title').value;
+    let movieYear = document.getElementById('year').value;
+    let movieComment = 'This movie was uploaded by independent content creator';
 
-        if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
+    if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
-            alert('Invalid year! Please enter a whole number between 1900 and 2023.');
-        } else {
-            // If the year is a valid value, you can now use the movieTitle and movieYear variables to do whatever you want with the movie title and year, such as displaying them on the page or sending them to a server.
-            postMovie(movieTitle, movieYear,'',movieComment)
-        }
-        console.log(`${movieTitle}`)
-        console.log(`${movieYear}`)
+        alert('Invalid year! Please enter a whole number between 1900 and 2023.');
+    } else {
+        postMovie(movieTitle, movieYear,'',movieComment)
+        this.parentNode.remove();
+            alert('Thank you for your submission!');
     }
+    console.log(`${movieTitle}`)
+    console.log(`${movieYear}`)
+}
 
 
-    document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
+document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
 
 
 
-    const postMovie = (title, year, poster, comment) =>{
+const postMovie = (title, year, poster, comment) =>{
     console.log(title, year, poster, comment)
     const movieObj = {title: title, year: year, poster: poster, comment:'This movie was uploaded by independent content creator'};
     const option =   {
@@ -146,11 +146,9 @@ const addToCart = (title, year, poster) => {
 
 }
 
- function putMovie (id) {
+function putMovie (id) {
     id.preventDefault()
-
     console.log("hello")
-    // movie.preventDefault()
     const movieObj = {title: "Hello", body: '3'}
     const option =   {
         method: 'PUT',
@@ -185,7 +183,7 @@ function deleteMovie(id) {
     };
     console.log('delete option', option)
     fetch(`${url}${id}`, option)
-    // fetch(url, option)
+        // fetch(url, option)
         .then(response => response.json())
         .then(function (data) {
             // alert(`was deleted`)
@@ -199,19 +197,58 @@ function deleteMovie(id) {
 
 
 
+function createCartElements(cart) {
+    let renderCart = document.getElementById('renderCart');
+
+    for (let i = 0; i < cart.length; i++) {
+        let item = cart[i];
+
+        let card = document.createElement('div');
+        card.className = 'card';
+
+        let itemDiv = document.createElement('div');
+        itemDiv.style.display = 'flex';
+        itemDiv.style.justifyContent = 'space-between';
+
+        let poster = document.createElement('img');
+        poster.src = item.poster;
+        poster.width = 50;
+        poster.height = 50;
+
+        let title = document.createElement('p');
+        title.innerHTML = item.title;
+
+        let trashButton = document.createElement('button');
+        trashButton.innerHTML = 'delete me';
+        trashButton.className = 'trashDeleteBtn'
+
+
+
+        itemDiv.appendChild(poster);
+        itemDiv.appendChild(title);
+        card.appendChild(itemDiv);
+        renderCart.appendChild(card);
+        itemDiv.appendChild(trashButton);
+    }
+}
+
+let shoppingCartButton = document.getElementById('shoppingCart');
+
+shoppingCartButton.addEventListener('click', function() {
+    createCartElements(cart);
+});
+
+
 
 
 
 
 /*
 *
-* (2) CREATE A MODAL THAT POP-UP'S FOR CHECK OUT (PUT)
-*                   (A) Can Edit the order quantity (PATCH)
-*                   (B) Calculate subtotal and total
-*                   (C) Input that puts in special code to get 20% discount
-*                   (D) DELETE MOVIES FROM THE LIST
+* (1) new url so I am starting from a clean slate
+* (2) fix button to cart
+* (3) loading animation
+* (4) class="navbar-toggler-icon" hover rather than click (HAMBERGER MENU BTN)
+* (5) allow for POST, PATCH, DELETE
+*
 * */
-
-
-
-
