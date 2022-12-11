@@ -7,7 +7,8 @@ let hideLoading = $('.lds-ring').hide();
 
 
 //URL for the glitch database
-const url = "https://axiomatic-private-utahceratops.glitch.me/movies/";
+// const url = "https://clover-everlasting-servant.glitch.me/movies/";
+const url = "https://tame-saber-splash.glitch.me/movies/";
 
 //This gets the live and accurate update of the POST request from glitch
 fetch(url).then(res => res.json()).then(data => console.log(data));
@@ -71,8 +72,8 @@ const append = function (data) {
                          <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
                          
-           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}')">Add Movie</button>  
-<!--           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}');postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>  -->
+<!--           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="addToCart('${Title}','${Year}','${Poster}')">Add Movie</button>  -->
+           <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>  
             </div></div>`
 
 
@@ -85,32 +86,33 @@ const append = function (data) {
 * editing (glitch).  taking advantage of Async events
 * */
 
-let cart =[];
-
-const addToCart = (title, year, poster) => {
-    let item = {
-        title: title,
-        year: year,
-        poster: poster
-
-    };
-    cart.push(item);
-    console.log('cart', cart);
-    console.log(cart.length);
-
-}
+// let cart =[];
+//
+// const addToCart = (title, year, poster) => {
+//     let item = {
+//         title: title,
+//         year: year,
+//         poster: poster
+//
+//     };
+//     cart.push(item);
+//     console.log('cart', cart);
+//     console.log(cart.length);
+//
+// }
 
 
 function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
+    let moviePoster = '<img src="../img/default-movie.png" alt="default">'
     let movieComment = 'This movie was uploaded by independent content creator';
 
     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        postMovie(movieTitle, movieYear,'',movieComment)
+        postMovie(movieTitle, movieYear,moviePoster,movieComment)
         this.parentNode.remove();
             alert('Thank you for your submission!');
     }
@@ -173,7 +175,9 @@ function putMovie (id) {
 
 
 function deleteMovie(id) {
-    const movieObj = {title: "Hello", body: '1'}
+    const movieObj = {id: id}
+
+
     const option = {
         method: 'DELETE',
         headers: {
@@ -195,6 +199,17 @@ function deleteMovie(id) {
 
 }
 
+
+//This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
+//Glitch is terrible
+function resetDatabase(id) {
+    for (var i = 287; i <= 287; i++) {
+        deleteMovie([i])
+
+    }
+}
+let reset = document.getElementById('deleteDatabase')
+    reset.addEventListener('click', resetDatabase);
 
 
 function createCartElements(cart) {
