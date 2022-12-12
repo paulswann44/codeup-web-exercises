@@ -7,7 +7,7 @@ let hideLoading = $('.lds-ring').hide();
 
 
 //URL for the glitch database
-const url = "https://spiny-irradiated-orchestra.glitch.me/movies/";
+const url = "https://autumn-dapper-armadillo.glitch.me/movies/";
 
 //This gets the live and accurate update of the POST request from glitch
 fetch(url).then(res => res.json()).then(data => console.log(data));
@@ -18,7 +18,6 @@ $('#submit-btn').click((event) => {
     event.preventDefault();
     let search = $('#search').val()
     getMovies(search);
-    // postInCart(search);
 
 });
 
@@ -33,26 +32,23 @@ function loadingAnimation() {
 
 
 //Get request to the omdb API
-const getMovies = async (search) => {
+const getMovies = search => {
     loadingAnimation()
-    const response = await
-        fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
-            .then(response => response.json())//then... return json
-            .then(function (data) { //then return data
-                // console.log('data', data);
-                // loadingAnimation();
-
-                let movie = data.Search;
-
-                let appendMovies = append(movie);
-                $('#append-movies').html(appendMovies);
+    fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
+        .then(response => response.json())
+        .then(function (data) {
 
 
-            })
-            .catch((error) => {
-                loadingAnimation();
-                console.log(error);
-            })
+            let movie = data.Search;
+            let appendMovies = append(movie);
+            $('#append-movies').html(appendMovies);
+
+
+        })
+        .catch((error) => {
+            loadingAnimation();
+            console.log(error);
+        })
 }
 
 //Appends into a card when information if fetched
@@ -79,7 +75,6 @@ function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
     let moviePoster = '<img src="img/default-movie.png" alt="default">'
-    let movieComment = 'This movie was uploaded by independent content creator';
 
     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
@@ -125,29 +120,36 @@ const postMovie = (title, year, poster, comment) => {
 
 }
 
-function putMovie(id) {
-    id.preventDefault()
-    console.log("hello")
-    const movieObj = {title: "Hello", body: '3'}
+
+function putMovie(title, year, poster, id) {
+    const movieObj = {id: id};
     const option = {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(movieObj),
     };
-    console.log('put option', option)
-    fetch(`${url}${id}`, option)
-        .then(response => response.json())
-        .then(function (data) {
-            alert('movie was good to watch')
+
+    return fetch(`${url}${id}`, option)
+        .then((response) => response.text())
+        .then((data) => {
+            // Update the movie's information in the UI
+            alert('Movie was updated successfully!');
             console.log('data', data);
         })
         .catch((error) => {
-            console.log(error);
-        })
-
+            // Display an error message to the user
+            alert(`Error updating movie: ${error.message}`);
+            console.log(error.message);
+        });
 }
+
+putMovie().then(() => {
+
+    // Do something with the return value of the function
+    // For example, update the list of movies in the UI
+});
 
 
 function deleteMovie(id) {
@@ -195,7 +197,7 @@ console.log('selected values: ', selectedValues)
 function createCartElements(cart) {
     let renderCart = document.getElementById('renderCart');
 
-    for (let i = 3; i < cart.length; i++) {
+    for (let i = 38; i < cart.length; i++) {
         let item = cart[i];
         console.log('item: ', item)
 
@@ -268,25 +270,15 @@ let shoppingCartButton = document.getElementById('shoppingCart');
 shoppingCartButton.addEventListener('click', postInCart);
 
 
-/*
-*(1) I want to select the values into an array 'selectedValues'
-* (2) create a function named deleteChecks that accepts the array 'selected values and loops it
-*
-* */
-
 function deleteChecks(selectedValues) {
-    // get all elements with the class name 'remove'
     let removeButtons = document.getElementsByClassName('remove');
-
-    // add an event listener to each 'remove' button that listens for a 'click' event
     for (let i = 0; i < removeButtons.length; i++) {
         removeButtons[i].addEventListener('click', function () {
-            // loop through the selectedValues array
             for (let j = 0; j < selectedValues.length; j++) {
                 let value = selectedValues[j];
                 document.querySelector(`input[value="${value}"]`).parentElement.remove();
                 deleteMovie(value);
-                // $(".modal-content").remove();
+
             }
 
 
@@ -294,8 +286,4 @@ function deleteChecks(selectedValues) {
     }
 }
 
-
 deleteChecks(selectedValues);
-
-
-
