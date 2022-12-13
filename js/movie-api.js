@@ -1,7 +1,3 @@
-/*PART (0)
-* Any prerequisite functions/keys/variables
-* */
-
 const movieKey = MOVIE_API
 let hideLoading = $('.lds-ring').hide();
 
@@ -54,7 +50,7 @@ const getMovies = search => {
 }
 
 //Appends into a card when information if fetched
-const append = function (data) {
+const append = data => {
     let html = ``
     for (let i in data) {
         // console.log("Data: ", data[i])
@@ -62,7 +58,7 @@ const append = function (data) {
         html += `<div class="row">
 <div class="container parent col-md card" id="parent">
             <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button>
-                         <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
+                         <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster} alt='image'">
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
                                     <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>
             </div></div>`
@@ -76,7 +72,7 @@ const append = function (data) {
 function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
-    let moviePoster = '<img src="img/default-movie.png" alt="default">'
+    let moviePoster = '<img src="../img/default-movie.png" alt="default">'
     let movieDetails = [movieTitle, movieYear, moviePoster];
 
     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
@@ -89,7 +85,7 @@ function uploadMovie() {
     }
     console.log(`${movieTitle}`)
     console.log(`${movieYear}`)
-};
+}
 
 
 let uploadMovies = document.getElementById('uploadMovie');
@@ -102,7 +98,7 @@ const postMovie = movieDetails => {
         year: movieDetails[1],
         poster: movieDetails[2],
     };
-    const option = {
+    let option = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -124,10 +120,10 @@ const postMovie = movieDetails => {
 
 
 const deleteMovie = id => {
-    const movieObj = {id: id};
+    let movieObj = {id: id};
 
 
-    const option = {
+    let option = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -151,7 +147,7 @@ const deleteMovie = id => {
 
 //This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
 //Glitch is terrible.
-function resetDatabase(id) {
+const resetDatabase = id => {
     for (var i = 0; i <= 0; i++) {
         deleteMovie([i])
 
@@ -220,7 +216,7 @@ console.log('selected values: ', selectedValues)
 //
 // };
 
-function createCartElements(cart) {
+const createCartElements = cart => {
     let renderCart = document.getElementById('renderCart');
     let itemCart = ``;
     //Let it be 15 because indexes between 0-14 is dummy data.
@@ -228,7 +224,7 @@ function createCartElements(cart) {
         let item = cart[i];
         itemCart += `<div class="card">`
         itemCart += `<div class="d-flex justify-content-between">`
-        itemCart += ` <img src=${item.poster} class="imgCard">`
+        itemCart += ` <img src='${item.poster}' class='imageCard' alt='image'>`  //<== I need help here :'(
         itemCart += ` <p>${item.title}</p>`
         itemCart += `<input type="checkbox" name="name" value="${item.id}" id="check">`
         itemCart += `</div>`
@@ -290,9 +286,8 @@ function deleteChecks(selectedValues) {
 deleteChecks(selectedValues);
 
 
-// whenever I click the button with the id of
-
-const putMovie = (editDetails) => {
+const putMovie = editDetails => {
+    let id = editDetails[0]
     const movieObj = {id: editDetails[0], title: editDetails[1], year: editDetails[2], comment: editDetails[3]};
     // const movieObj = {id: id, title: title, year: year};
     const option = {
@@ -345,4 +340,3 @@ editButton.addEventListener('click', function editMovies(event) {
 
 
 });
-
