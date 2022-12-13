@@ -17,7 +17,7 @@ fetch(url).then(res => res.json()).then(data => console.log(data));
 
 const searchButton = document.getElementById("submit-btn");
 
-searchButton.addEventListener("click", function(event) {
+searchButton.addEventListener("click", function (event) {
     event.preventDefault();
     let search = document.getElementById("search").value;
     getMovies(search);
@@ -123,8 +123,6 @@ const postMovie = movieDetails => {
 }
 
 
-
-
 const deleteMovie = id => {
     const movieObj = {id: id};
 
@@ -224,28 +222,24 @@ console.log('selected values: ', selectedValues)
 
 function createCartElements(cart) {
     let renderCart = document.getElementById('renderCart');
-
-
-    let itemCart= ``;
+    let itemCart = ``;
     //Let it be 15 because indexes between 0-14 is dummy data.
     for (let i = 15; i < cart.length; i++) {
         let item = cart[i];
-        itemCart +=
-            `<div class="card">
-        <div class="d-flex justify-content-between">
-        <img src=${item.poster} class="imgCard">
-        <p>${item.title}</p>
-        <input type="checkbox" name="name" value="${item.id}" id="check">
-        </div>
-        </div>`
+        itemCart += `<div class="card">`
+        itemCart += `<div class="d-flex justify-content-between">`
+        itemCart += ` <img src=${item.poster} class="imgCard">`
+        itemCart += ` <p>${item.title}</p>`
+        itemCart += `<input type="checkbox" name="name" value="${item.id}" id="check">`
+        itemCart += `</div>`
+        itemCart += `</div>`
     }
 
     renderCart.innerHTML = itemCart;
 
 
-
     let checkboxes = document.querySelectorAll('#check');  //selects all the checkboxes with the ID of checkbox
-    checkboxes.forEach(function(checkbox) {       //loops through each checkbox with the id of #check
+    checkboxes.forEach(function (checkbox) {       //loops through each checkbox with the id of #check
         checkbox.addEventListener('click', function (event) {  //listens for th click of the individual checkbox
             if (event.target.checked) { //if this checked box specifically triggers (target) the event push to array selectedValues
                 selectedValues.push(event.target.value);
@@ -258,7 +252,6 @@ function createCartElements(cart) {
         });
     });
 }
-
 
 
 const postInCart = search => {
@@ -330,26 +323,25 @@ const putMovie = (editDetails) => {
 
 
 let editButton = document.getElementById('update-button');
-editButton.addEventListener('click', function editMovies(event){
+editButton.addEventListener('click', function editMovies(event) {
     event.preventDefault();
-    let idNumber =selectedValues;
+    let idNumber = selectedValues;
     let title = document.getElementById("edit-title").value;
     let year = Number(document.getElementById("edit-year").value);
     let comment = document.getElementById("edit-comment").value;
     console.log('idNumber', idNumber)
-    console.log('title ',title);
-    console.log('year ',year);
-    console.log('comment ',comment);
+    console.log('title ', title);
+    console.log('year ', year);
+    console.log('comment ', comment);
 
-    let editDetails= [idNumber, title, year, comment]
+    let editDetails = [idNumber, title, year, comment]
 
     // if (idNumber || title || year === null || undefined){
     //     alert('Submit the appropriate information below');
     // } else{
-        // putMovie(editDetails);
+    putMovie(editDetails);
 
     // }
-
 
 
 });
