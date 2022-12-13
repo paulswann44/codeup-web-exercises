@@ -10,7 +10,6 @@ fetch(url).then(res => res.json()).then(data => console.log(data));
 
 
 //This is a function that stores the input value
-
 const searchButton = document.getElementById("submit-btn");
 
 searchButton.addEventListener("click", function (event) {
@@ -36,11 +35,9 @@ const getMovies = search => {
         .then(response => response.json())
         .then(function (data) {
 
-
             let movie = data.Search;
             let appendMovies = append(movie);
             $('#append-movies').html(appendMovies);
-
 
         })
         .catch((error) => {
@@ -73,13 +70,13 @@ function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
     let moviePoster = '<img src="../img/default-movie.png" alt="default">'
-    let movieDetails = [movieTitle, movieYear, moviePoster];
 
     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        postMovie(movieDetails)
+        postMovie(movieTitle, movieYear, moviePoster)
+        // postMovie(movieDetails)
         this.parentNode.remove();
         alert('Thank you for your submission!');
     }
@@ -92,11 +89,11 @@ let uploadMovies = document.getElementById('uploadMovie');
 uploadMovies.addEventListener('click', uploadMovie);
 
 
-const postMovie = movieDetails => {
+const postMovie = (title, year, poster) => {
     const movieObj = {
-        title: movieDetails[0],
-        year: movieDetails[1],
-        poster: movieDetails[2],
+        title: title,
+        year: year,
+        poster: poster
     };
     let option = {
         method: 'POST',
@@ -118,10 +115,8 @@ const postMovie = movieDetails => {
 
 }
 
-
 const deleteMovie = id => {
     let movieObj = {id: id};
-
 
     let option = {
         method: 'DELETE',
@@ -132,10 +127,8 @@ const deleteMovie = id => {
     };
     console.log('delete option', option)
     fetch(`${url}${id}`, option)
-        // fetch(url, option)
         .then(response => response.json())
         .then(function (data) {
-            // alert(`was deleted`)
             console.log(' delete data', data);
         })
         .catch((error) => {
@@ -147,74 +140,37 @@ const deleteMovie = id => {
 
 //This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
 //Glitch is terrible.
-const resetDatabase = id => {
-    for (var i = 0; i <= 0; i++) {
-        deleteMovie([i])
-
-    }
-}
-
-let reset = document.getElementById('deleteDatabase')
-reset.addEventListener('click', resetDatabase);
-
-
-let selectedValues = [];
-console.log('selected values: ', selectedValues)
-
-// function createCartElements(cart) {
-//     // cart.preventDefault()
-//     let renderCart = document.getElementById('renderCart');
-//
-//     for (let i = 15; i < cart.length; i++) {
-//         let item = cart[i];
-//         console.log('item: ', item)
-//
-//         let card = document.createElement('div');
-//         card.className = 'card';
-//
-//
-//         let itemDiv = document.createElement('div');
-//         itemDiv.style.display = 'flex';
-//         itemDiv.style.justifyContent = 'space-between';
-//
-//         let poster = document.createElement('img');
-//         poster.src = item.poster;
-//         poster.width = 50;
-//         poster.height = 50;
-//
-//
-//         let title = document.createElement('p');
-//         title.innerHTML = item.title;
-//
-//
-//         let checkbox = document.createElement('input');
-//         checkbox.type = 'checkbox';
-//         checkbox.name = "name";
-//         checkbox.value = item.id;
-//         checkbox.id = "check";
-//
-//
-//         itemDiv.appendChild(poster);
-//         itemDiv.appendChild(title);
-//         card.appendChild(itemDiv);
-//         renderCart.appendChild(card);
-//         itemDiv.appendChild(checkbox);
-//
-//         checkbox.addEventListener('click', function (event) {
-//             if (event.target.checked) {
-//                 selectedValues.push(event.target.value);
-//             } else {
-//                 let index = selectedValues.indexOf(event.target.value);
-//                 if (index > -1) {
-//                     selectedValues.splice(0, 15);
-//                 }
-//             }
-//         });
+// const resetDatabase = id => {
+//     for (let i = 0; i <= 0; i++) {
+//         deleteMovie([i])
 //
 //     }
+// }
 //
-//
-// };
+// let reset = document.getElementById('deleteDatabase')
+// reset.addEventListener('click', resetDatabase);
+
+
+const selectedValues = [];
+console.log('selected values: ', selectedValues);
+
+
+const getInCart = search => {
+    const response =
+        fetch(`${url}`)
+            .then(response => response.json())//then... return json
+            .then(function (data) { //then return data
+                console.log('cart data', data);
+                createCartElements(data)
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+}
+let shoppingCartButton = document.getElementById('shoppingCart');
+shoppingCartButton.addEventListener('click', getInCart);
+
 
 const createCartElements = cart => {
     let renderCart = document.getElementById('renderCart');
@@ -225,7 +181,7 @@ const createCartElements = cart => {
         itemCart += `<div class="card">`
         itemCart += `<div class="d-flex justify-content-between">`
         itemCart += ` <img src='${item.poster}' class='imageCard' alt='image'>`  //<== I need help here :'(
-        itemCart += ` <p>${item.title}</p>`
+        itemCart += `<p>${item.title}</p>`
         itemCart += `<input type="checkbox" name="name" value="${item.id}" id="check">`
         itemCart += `</div>`
         itemCart += `</div>`
@@ -242,7 +198,7 @@ const createCartElements = cart => {
             } else {
                 let index = selectedValues.indexOf(event.target.value);
                 if (index > -1) {
-                    selectedValues.splice(0, 15);
+                    selectedValues.splice(1, 15);
                 }
             }
         });
@@ -250,35 +206,17 @@ const createCartElements = cart => {
 }
 
 
-const postInCart = search => {
-    const response =
-        fetch(`${url}`)
-            .then(response => response.json())//then... return json
-            .then(function (data) { //then return data
-                console.log('cart data', data);
-                createCartElements(data)
-
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-}
-let shoppingCartButton = document.getElementById('shoppingCart');
-shoppingCartButton.addEventListener('click', postInCart);
-
 
 function deleteChecks(selectedValues) {
     let removeButtons = document.getElementsByClassName('remove');
+
     for (let i = 0; i < removeButtons.length; i++) {
         removeButtons[i].addEventListener('click', function () {
             for (let j = 0; j < selectedValues.length; j++) {
                 let value = selectedValues[j];
-                document.querySelector(`input[value="${value}"]`).parentElement.remove();
-                deleteMovie(value);
+                deleteMovie(value)
 
             }
-
-
         });
     }
 }
@@ -286,57 +224,68 @@ function deleteChecks(selectedValues) {
 deleteChecks(selectedValues);
 
 
-const putMovie = editDetails => {
-    let id = editDetails[0]
-    const movieObj = {id: editDetails[0], title: editDetails[1], year: editDetails[2], comment: editDetails[3]};
-    // const movieObj = {id: id, title: title, year: year};
-    const option = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieObj),
-    };
+// const putMovie = editDetails => {
+    const putMovie = (id, title, year, comment) => {
+        // let id = editDetails[0]
+        // const movieObj = {id: editDetails[0], title: editDetails[1], year: editDetails[2], comment: editDetails[3]};
+        const movieObj = {id: id, title: title, year: year, comment: comment};
+        let option = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieObj),
+        };
 
-    return fetch(`${url}${id}`, option)
-        .then((response) => response.text())
-        .then((data) => {
-            // Update the movie's information in the UI
-            alert('Movie was updated successfully!');
-            console.log('data', data);
-        })
-        .catch((error) => {
-            // Display an error message to the user
-            alert(`Error updating movie: ${error.message}`);
-            console.log(error.message);
-        });
-}
+        return fetch(`${url}${id}`, option)
+            .then((response) => response.text())
+            .then((data) => {
+                // Update the movie's information in the UI
+                alert('Movie was updated successfully!');
+                console.log('data', data);
+            })
+            .catch((error) => {
+                // Display an error message to the user
+                alert(`Error updating movie: ${error.message}`);
+                console.log(error.message);
+            });
+    }
 
-//MODAL 3 testing
+
 //narrative:  (1) I want a function named editMovies.  It takes in the array called selectedValues whenever I click the button with the id of #update-button and store it in a variable with the idMovies. It stores the value of the 3 inputs with the id of #edit-title for the title, id of #edit-year for the year, and id of #edit-comment for the textarea (comments).
 // (2) if idNumber || title || year === null || undefine ===> alert message 'Enter the following '
 
 
+
+
+/*
+*
+* NEW PROBLEM:Whenever I click the checkbox, then click the button with the id of #remove it does not delete multiple times
+*
+*
+* */
 let editButton = document.getElementById('update-button');
 editButton.addEventListener('click', function editMovies(event) {
     event.preventDefault();
-    let idNumber = selectedValues;
+    let movieId = selectedValues;
     let title = document.getElementById("edit-title").value;
-    let year = Number(document.getElementById("edit-year").value);
+    let year = document.getElementById("edit-year").value;
     let comment = document.getElementById("edit-comment").value;
-    console.log('idNumber', idNumber)
+    console.log('idNumber', movieId)
     console.log('title ', title);
     console.log('year ', year);
     console.log('comment ', comment);
 
-    let editDetails = [idNumber, title, year, comment]
+    // let editDetails = [movieId, title, year, comment]
 
-    // if (idNumber || title || year === null || undefined){
-    //     alert('Submit the appropriate information below');
-    // } else{
-    putMovie(editDetails);
+    if (movieId || title || year === null || undefined) {
+        alert('Submit the appropriate information below');
+    } else {
+        // putMovie(editDetails);
+    putMovie(movieId, title, year, comment);
 
-    // }
+        }
 
 
 });
+
