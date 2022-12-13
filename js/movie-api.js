@@ -14,11 +14,13 @@ fetch(url).then(res => res.json()).then(data => console.log(data));
 
 
 //This is a function that stores the input value
-$('#submit-btn').click((event) => {
-    event.preventDefault();
-    let search = $('#search').val()
-    getMovies(search);
 
+const searchButton = document.getElementById("submit-btn");
+
+searchButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    let search = document.getElementById("search").value;
+    getMovies(search);
 });
 
 
@@ -75,30 +77,30 @@ function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
     let moviePoster = '<img src="img/default-movie.png" alt="default">'
+    let movieDetails = [movieTitle, movieYear, moviePoster];
 
     if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
 
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        postMovie(movieTitle, movieYear, moviePoster)
+        postMovie(movieDetails)
         this.parentNode.remove();
         alert('Thank you for your submission!');
     }
     console.log(`${movieTitle}`)
     console.log(`${movieYear}`)
-}
+};
 
 
-document.getElementById('uploadMovie').addEventListener('click', uploadMovie);
+let uploadMovies = document.getElementById('uploadMovie');
+uploadMovies.addEventListener('click', uploadMovie);
 
 
-const postMovie = (title, year, poster, comment) => {
-    console.log(title, year, poster, comment)
+const postMovie = movieDetails => {
     const movieObj = {
-        title: title,
-        year: year,
-        poster: poster,
-        comment: 'This movie was uploaded by independent content creator'
+        title: movieDetails[0],
+        year: movieDetails[1],
+        poster: movieDetails[2],
     };
     const option = {
         method: 'POST',
@@ -121,39 +123,10 @@ const postMovie = (title, year, poster, comment) => {
 }
 
 
-function putMovie(title, year, poster, id) {
+
+
+const deleteMovie = id => {
     const movieObj = {id: id};
-    const option = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieObj),
-    };
-
-    return fetch(`${url}${id}`, option)
-        .then((response) => response.text())
-        .then((data) => {
-            // Update the movie's information in the UI
-            alert('Movie was updated successfully!');
-            console.log('data', data);
-        })
-        .catch((error) => {
-            // Display an error message to the user
-            alert(`Error updating movie: ${error.message}`);
-            console.log(error.message);
-        });
-}
-
-// putMovie().then(() => {
-
-    // Do something with the return value of the function
-    // For example, update the list of movies in the UI
-// });
-
-
-function deleteMovie(id) {
-    const movieObj = {id: id}
 
 
     const option = {
@@ -179,16 +152,16 @@ function deleteMovie(id) {
 
 
 //This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
-//Glitch is terrible
-// function resetDatabase(id) {
-//     for (var i = 281; i <= 291; i++) {
-//         deleteMovie([i])
-//
-//     }
-// }
+//Glitch is terrible.
+function resetDatabase(id) {
+    for (var i = 0; i <= 0; i++) {
+        deleteMovie([i])
 
-// let reset = document.getElementById('deleteDatabase')
-// reset.addEventListener('click', resetDatabase);
+    }
+}
+
+let reset = document.getElementById('deleteDatabase')
+reset.addEventListener('click', resetDatabase);
 
 
 let selectedValues = [];
@@ -252,16 +225,15 @@ console.log('selected values: ', selectedValues)
 function createCartElements(cart) {
     let renderCart = document.getElementById('renderCart');
 
-    // Build the HTML for the cart elements
-    let itemCart= '';
+
+    let itemCart= ``;
+    //Let it be 15 because indexes between 0-14 is dummy data.
     for (let i = 15; i < cart.length; i++) {
         let item = cart[i];
-        console.log('item: ', item)
-
         itemCart +=
             `<div class="card">
-        <div style="display: flex; justify-content: space-between">
-        <img src="${item.poster}" width="50" height="50">
+        <div class="d-flex justify-content-between">
+        <img src=${item.poster} class="imgCard">
         <p>${item.title}</p>
         <input type="checkbox" name="name" value="${item.id}" id="check">
         </div>
@@ -269,6 +241,8 @@ function createCartElements(cart) {
     }
 
     renderCart.innerHTML = itemCart;
+
+
 
     let checkboxes = document.querySelectorAll('#check');  //selects all the checkboxes with the ID of checkbox
     checkboxes.forEach(function(checkbox) {       //loops through each checkbox with the id of #check
@@ -287,9 +261,7 @@ function createCartElements(cart) {
 
 
 
-//this gets the current jason file
 const postInCart = search => {
-    // search.preventDefault()
     const response =
         fetch(`${url}`)
             .then(response => response.json())//then... return json
@@ -323,3 +295,62 @@ function deleteChecks(selectedValues) {
 }
 
 deleteChecks(selectedValues);
+
+
+// whenever I click the button with the id of
+
+const putMovie = (editDetails) => {
+    const movieObj = {id: editDetails[0], title: editDetails[1], year: editDetails[2], comment: editDetails[3]};
+    // const movieObj = {id: id, title: title, year: year};
+    const option = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movieObj),
+    };
+
+    return fetch(`${url}${id}`, option)
+        .then((response) => response.text())
+        .then((data) => {
+            // Update the movie's information in the UI
+            alert('Movie was updated successfully!');
+            console.log('data', data);
+        })
+        .catch((error) => {
+            // Display an error message to the user
+            alert(`Error updating movie: ${error.message}`);
+            console.log(error.message);
+        });
+}
+
+//MODAL 3 testing
+//narrative:  (1) I want a function named editMovies.  It takes in the array called selectedValues whenever I click the button with the id of #update-button and store it in a variable with the idMovies. It stores the value of the 3 inputs with the id of #edit-title for the title, id of #edit-year for the year, and id of #edit-comment for the textarea (comments).
+// (2) if idNumber || title || year === null || undefine ===> alert message 'Enter the following '
+
+
+let editButton = document.getElementById('update-button');
+editButton.addEventListener('click', function editMovies(event){
+    event.preventDefault();
+    let idNumber =selectedValues;
+    let title = document.getElementById("edit-title").value;
+    let year = Number(document.getElementById("edit-year").value);
+    let comment = document.getElementById("edit-comment").value;
+    console.log('idNumber', idNumber)
+    console.log('title ',title);
+    console.log('year ',year);
+    console.log('comment ',comment);
+
+    let editDetails= [idNumber, title, year, comment]
+
+    // if (idNumber || title || year === null || undefined){
+    //     alert('Submit the appropriate information below');
+    // } else{
+        // putMovie(editDetails);
+
+    // }
+
+
+
+});
+

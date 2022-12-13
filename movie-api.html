@@ -14,7 +14,6 @@
 </head>
 
 
-
 <div>
     <nav class="navbar navbar-dark bg-dark fixed-top mb-3">
         <div class="container-fluid">
@@ -35,16 +34,15 @@
                         <li class="nav-item">
                         </li>
                         <li class="nav-item">
-                            <button class="btn"> <a class="nav-link" href="#modal-cart" id="shoppingCart" >View Your Cart</a></button>
+                            <button class="btn"><a class="nav-link" href="#">Home</a></button>
                         </li>
                         <li class="nav-item">
-                            <button class="btn"><a class="nav-link" href="#modal-add" id="addingMovie">Upload a Movie</a></button>
+                            <button class="btn"><a class="nav-link" href="#modal-cart" id="shoppingCart">View Your
+                                Cart</a></button>
                         </li>
                         <li class="nav-item">
-                            <button class="btn"><a class="nav-link" href="#modal-edit" id="editMovie">Edit Movies</a></button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn"><a class="nav-link" id="deleteDatabase">Reset Glitch Database</a></button>
+                            <button class="btn"><a class="nav-link" id="deleteDatabase" disabled>Reset Glitch Database</a>
+                            </button>
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#">Action</a></li>
@@ -68,7 +66,6 @@
 </div>
 
 
-
 <div id="modal-cart" class="modal">
     <div class="modal-content">
         <div class="d-flex justify-content-between align-items-center">
@@ -77,25 +74,24 @@
         <ul class="d-flex justify-content-between p-0">
             <li>Poster:</li>
             <li>Title:</li>
-            <li></li>
+            <li>Select:</li>
         </ul>
-
-
         <div id="renderCart">
 
             <!--CART ITEMS GOES HERE -->
 
         </div>
-
-
         <div class="d-flex justify-content-between">
-            <button class="btn submit"> <a href="#" class="card-link text-primary submit">Submit</a></button>
-            <button class="btn edit"><a href="modal-edit" class="card-link text-warning edit">Edit</a></button>
+            <button class="btn submit"><a href="#modal-add" class="card-link text-primary submit">Add Movie</a></button>
+            <!--href needs #.... I am treating it like an id-->
+            <button class="btn edit"><a href="#modal-edit" class="card-link text-warning edit">Edit</a></button>
             <button class="btn remove"><a href="#" class="card-link text-danger remove">Remove</a></button>
         </div>
         <a href="#" class="modal-close">&times;</a>
     </div>
 </div>
+
+
 
 
 <!--MODAL ONE - POST CONTENT ONLY-->
@@ -114,7 +110,7 @@
                id="upload" name="upload"
                accept="video/*">
         <p>*All videos are subject for review.</p>
-        <button type="button" class="btn btn-primary btn-lg" id="uploadMovie" >Add Content</button>
+        <button type="button" class="btn btn-primary btn-lg" id="uploadMovie">Add Content</button>
 
 
         <a href="#" class="modal-close">&times;</a>
@@ -126,12 +122,11 @@
 <div id="modal-edit" class="modal">
     <div class="modal-content">
         <h1 class='d-flex justify-content-center'>Update Information</h1>
-        <label>Title: <input class='mb-2' type="type" placeholder="Enter Movie Title:"></label>
-        <label>Year: <input class='mb-2'type="type" placeholder="Enter Movie Year:"></label>
-        <label></label>Comment: <textarea class='mb-2' cols="30" rows="10" placeholder="Leave a comment here"></textarea>
-        <button type="button" class="btn btn-primary btn-lg" id="update-button">Update content</button>
-
-
+        <label>Title: <input class='mb-2' type="type" id='edit-title' placeholder="Enter Movie Title:"></label>
+        <label>Year: <input class='mb-2' type="number" id='edit-year' placeholder="YYYY" min="1900" max="2023" id='edit-year'></label>
+        <label></label>Comment: <textarea class='mb-2' id='edit-comment'cols="30" rows="10"
+                                          placeholder="Leave a comment here"></textarea>
+        <button type="button" class="btn btn-primary btn-lg" id="update-button">Update Content</button>
         <a href="#" class="modal-close">&times;</a>
     </div>
 </div>
