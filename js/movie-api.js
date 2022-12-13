@@ -59,10 +59,10 @@ const append = function (data) {
         const {Title, Year, Poster} = data[i]
         html += `<div class="row">
 <div class="container parent col-md card" id="parent">
-            <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button> 
+            <button type="button" class="btn-close remove-card" id="delete" onclick="parentNode.remove()"></button>
                          <img class="img-thumbnail mx-auto d-block border-0 w-75 h-75" src="${Poster}">
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
-                                    <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>  
+                                    <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>
             </div></div>`
 
 
@@ -145,11 +145,11 @@ function putMovie(title, year, poster, id) {
         });
 }
 
-putMovie().then(() => {
+// putMovie().then(() => {
 
     // Do something with the return value of the function
     // For example, update the list of movies in the UI
-});
+// });
 
 
 function deleteMovie(id) {
@@ -180,80 +180,116 @@ function deleteMovie(id) {
 
 //This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
 //Glitch is terrible
-function resetDatabase(id) {
-    for (var i = 281; i <= 291; i++) {
-        deleteMovie([i])
+// function resetDatabase(id) {
+//     for (var i = 281; i <= 291; i++) {
+//         deleteMovie([i])
+//
+//     }
+// }
 
-    }
-}
-
-let reset = document.getElementById('deleteDatabase')
-reset.addEventListener('click', resetDatabase);
+// let reset = document.getElementById('deleteDatabase')
+// reset.addEventListener('click', resetDatabase);
 
 
 let selectedValues = [];
 console.log('selected values: ', selectedValues)
 
+// function createCartElements(cart) {
+//     // cart.preventDefault()
+//     let renderCart = document.getElementById('renderCart');
+//
+//     for (let i = 15; i < cart.length; i++) {
+//         let item = cart[i];
+//         console.log('item: ', item)
+//
+//         let card = document.createElement('div');
+//         card.className = 'card';
+//
+//
+//         let itemDiv = document.createElement('div');
+//         itemDiv.style.display = 'flex';
+//         itemDiv.style.justifyContent = 'space-between';
+//
+//         let poster = document.createElement('img');
+//         poster.src = item.poster;
+//         poster.width = 50;
+//         poster.height = 50;
+//
+//
+//         let title = document.createElement('p');
+//         title.innerHTML = item.title;
+//
+//
+//         let checkbox = document.createElement('input');
+//         checkbox.type = 'checkbox';
+//         checkbox.name = "name";
+//         checkbox.value = item.id;
+//         checkbox.id = "check";
+//
+//
+//         itemDiv.appendChild(poster);
+//         itemDiv.appendChild(title);
+//         card.appendChild(itemDiv);
+//         renderCart.appendChild(card);
+//         itemDiv.appendChild(checkbox);
+//
+//         checkbox.addEventListener('click', function (event) {
+//             if (event.target.checked) {
+//                 selectedValues.push(event.target.value);
+//             } else {
+//                 let index = selectedValues.indexOf(event.target.value);
+//                 if (index > -1) {
+//                     selectedValues.splice(0, 15);
+//                 }
+//             }
+//         });
+//
+//     }
+//
+//
+// };
+
 function createCartElements(cart) {
     let renderCart = document.getElementById('renderCart');
 
-    for (let i = 38; i < cart.length; i++) {
+    // Build the HTML for the cart elements
+    let itemCart= '';
+    for (let i = 15; i < cart.length; i++) {
         let item = cart[i];
         console.log('item: ', item)
 
-        let card = document.createElement('div');
-        card.className = 'card';
+        itemCart +=
+            `<div class="card">
+        <div style="display: flex; justify-content: space-between">
+        <img src="${item.poster}" width="50" height="50">
+        <p>${item.title}</p>
+        <input type="checkbox" name="name" value="${item.id}" id="check">
+        </div>
+        </div>`
+    }
 
+    renderCart.innerHTML = itemCart;
 
-        let itemDiv = document.createElement('div');
-        itemDiv.style.display = 'flex';
-        itemDiv.style.justifyContent = 'space-between';
-
-        let poster = document.createElement('img');
-        poster.src = item.poster;
-        poster.width = 50;
-        poster.height = 50;
-
-
-        let title = document.createElement('p');
-        title.innerHTML = item.title;
-
-
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.name = "name";
-        checkbox.value = item.id;
-        checkbox.id = "check";
-
-
-        itemDiv.appendChild(poster);
-        itemDiv.appendChild(title);
-        card.appendChild(itemDiv);
-        renderCart.appendChild(card);
-        itemDiv.appendChild(checkbox);
-
-        // add an event listener to the checkbox that listens for a 'click' event
-        checkbox.addEventListener('click', function (event) {
-            // if the checkbox is checked, add its value to the selectedValues array
-            if (event.target.checked) {
+    let checkboxes = document.querySelectorAll('#check');  //selects all the checkboxes with the ID of checkbox
+    checkboxes.forEach(function(checkbox) {       //loops through each checkbox with the id of #check
+        checkbox.addEventListener('click', function (event) {  //listens for th click of the individual checkbox
+            if (event.target.checked) { //if this checked box specifically triggers (target) the event push to array selectedValues
                 selectedValues.push(event.target.value);
             } else {
-                // if the checkbox is not checked, remove its value from the selectedValues array
                 let index = selectedValues.indexOf(event.target.value);
                 if (index > -1) {
-                    selectedValues.splice(index, 1);
+                    selectedValues.splice(0, 15);
                 }
             }
         });
+    });
+}
 
-    }
-
-
-};
 
 
 //this gets the current jason file
-const postInCart = (search) => {
+const postInCart = search => {
+    // search.preventDefault()
     const response =
         fetch(`${url}`)
             .then(response => response.json())//then... return json

@@ -41,6 +41,9 @@
                             <button class="btn"><a class="nav-link" href="#modal-add" id="addingMovie">Upload a Movie</a></button>
                         </li>
                         <li class="nav-item">
+                            <button class="btn"><a class="nav-link" href="#modal-edit" id="editMovie">Edit Movies</a></button>
+                        </li>
+                        <li class="nav-item">
                             <button class="btn"><a class="nav-link" id="deleteDatabase">Reset Glitch Database</a></button>
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -87,7 +90,7 @@
 
         <div class="d-flex justify-content-between">
             <button class="btn submit"> <a href="#" class="card-link text-primary submit">Submit</a></button>
-            <button class="btn edit"><a href="#" class="card-link text-warning edit">Edit</a></button>
+            <button class="btn edit"><a href="modal-edit" class="card-link text-warning edit">Edit</a></button>
             <button class="btn remove"><a href="#" class="card-link text-danger remove">Remove</a></button>
         </div>
         <a href="#" class="modal-close">&times;</a>
@@ -112,6 +115,21 @@
                accept="video/*">
         <p>*All videos are subject for review.</p>
         <button type="button" class="btn btn-primary btn-lg" id="uploadMovie" >Add Content</button>
+
+
+        <a href="#" class="modal-close">&times;</a>
+    </div>
+</div>
+
+<!--MODAL THREE - PATCH ITEMS-->
+
+<div id="modal-edit" class="modal">
+    <div class="modal-content">
+        <h1 class='d-flex justify-content-center'>Update Information</h1>
+        <label>Title: <input class='mb-2' type="type" placeholder="Enter Movie Title:"></label>
+        <label>Year: <input class='mb-2'type="type" placeholder="Enter Movie Year:"></label>
+        <label></label>Comment: <textarea class='mb-2' cols="30" rows="10" placeholder="Leave a comment here"></textarea>
+        <button type="button" class="btn btn-primary btn-lg" id="update-button">Update content</button>
 
 
         <a href="#" class="modal-close">&times;</a>
