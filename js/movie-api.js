@@ -76,6 +76,7 @@ function uploadMovie() {
         postMovie(movieTitle, movieYear, moviePoster)
         this.parentNode.remove();
         alert('Thank you for your submission!');
+        window.location.reload();
     }
     console.log(`${movieTitle}`)
     console.log(`${movieYear}`)
