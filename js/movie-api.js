@@ -75,8 +75,9 @@ function uploadMovie() {
 
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        postMovie(movieTitle, movieYear, moviePoster)
-        // postMovie(movieDetails)
+
+        const movieDetails =[movieTitle, movieYear, moviePoster]
+        postMovie(movieDetails)
         this.parentNode.remove();
         alert('Thank you for your submission!');
     }
@@ -89,11 +90,11 @@ let uploadMovies = document.getElementById('uploadMovie');
 uploadMovies.addEventListener('click', uploadMovie);
 
 
-const postMovie = (title, year, poster) => {
+const postMovie = movieDetails => {
     const movieObj = {
-        title: title,
-        year: year,
-        poster: poster
+        title: movieDetails[0],
+        year: movieDetails[1],
+        poster: movieDetails[2]
     };
     let option = {
         method: 'POST',
@@ -138,19 +139,6 @@ const deleteMovie = id => {
 }
 
 
-//This is an internal tool.  Be careful when selecting a large range of index numbers (0 to 500 as an example) or will be denied access to glitch database.
-//Glitch is terrible.
-// const resetDatabase = id => {
-//     for (let i = 0; i <= 0; i++) {
-//         deleteMovie([i])
-//
-//     }
-// }
-//
-// let reset = document.getElementById('deleteDatabase')
-// reset.addEventListener('click', resetDatabase);
-
-
 const selectedValues = [];
 console.log('selected values: ', selectedValues);
 
@@ -190,10 +178,10 @@ const createCartElements = cart => {
     renderCart.innerHTML = itemCart;
 
 
-    let checkboxes = document.querySelectorAll('#check');  //selects all the checkboxes with the ID of checkbox
-    checkboxes.forEach(function (checkbox) {       //loops through each checkbox with the id of #check
-        checkbox.addEventListener('click', function (event) {  //listens for th click of the individual checkbox
-            if (event.target.checked) { //if this checked box specifically triggers (target) the event push to array selectedValues
+    let checkboxes = document.querySelectorAll('#check');
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('click', function (event) {
+            if (event.target.checked) {
                 selectedValues.push(event.target.value);
             } else {
                 let index = selectedValues.indexOf(event.target.value);
@@ -224,68 +212,48 @@ function deleteChecks(selectedValues) {
 deleteChecks(selectedValues);
 
 
-// const putMovie = editDetails => {
-    const putMovie = (id, title, year, comment) => {
-        // let id = editDetails[0]
-        // const movieObj = {id: editDetails[0], title: editDetails[1], year: editDetails[2], comment: editDetails[3]};
-        const movieObj = {id: id, title: title, year: year, comment: comment};
-        let option = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movieObj),
-        };
+const putMovie = (editDetails) => {
+    const movieObj = {
+        title: editDetails[0],
+        year: editDetails[1],
+        id: editDetails[2],
+        comment: editDetails[3]
+    };
+    const option = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movieObj),
+    };
 
-        return fetch(`${url}${id}`, option)
-            .then((response) => response.text())
-            .then((data) => {
-                // Update the movie's information in the UI
-                alert('Movie was updated successfully!');
-                console.log('data', data);
-            })
-            .catch((error) => {
-                // Display an error message to the user
-                alert(`Error updating movie: ${error.message}`);
-                console.log(error.message);
-            });
-    }
-
-
-//narrative:  (1) I want a function named editMovies.  It takes in the array called selectedValues whenever I click the button with the id of #update-button and store it in a variable with the idMovies. It stores the value of the 3 inputs with the id of #edit-title for the title, id of #edit-year for the year, and id of #edit-comment for the textarea (comments).
-// (2) if idNumber || title || year === null || undefine ===> alert message 'Enter the following '
+    return fetch(`${url}${editDetails[2]}`, option)
+        .then((response) => response.text())
+        .then((data) => {
+            alert('Movie was updated successfully!');
+            console.log('data', data);
+        })
+        .catch((error) => {
+            alert(`Error updating movie: ${error.message}`);
+            console.log(error.message);
+        });
+};
 
 
 
-
-/*
-*
-* NEW PROBLEM:Whenever I click the checkbox, then click the button with the id of #remove it does not delete multiple times
-*
-*
-* */
 let editButton = document.getElementById('update-button');
-editButton.addEventListener('click', function editMovies(event) {
+editButton.addEventListener('click', (event) => {
     event.preventDefault();
     let movieId = selectedValues;
-    let title = document.getElementById("edit-title").value;
-    let year = document.getElementById("edit-year").value;
-    let comment = document.getElementById("edit-comment").value;
-    console.log('idNumber', movieId)
+    let title = document.getElementById('edit-title').value;
+    let year = document.getElementById('edit-year').value;
+    let comment = document.getElementById('edit-comment').value;
+    console.log('idNumber', movieId);
     console.log('title ', title);
     console.log('year ', year);
     console.log('comment ', comment);
 
-    // let editDetails = [movieId, title, year, comment]
-
-    if (movieId || title || year === null || undefined) {
-        alert('Submit the appropriate information below');
-    } else {
-        // putMovie(editDetails);
-    putMovie(movieId, title, year, comment);
-
-        }
-
-
+    let editDetails = [title, year, movieId, comment];
+    let stringPromise = putMovie(editDetails);
+    event.target.parentNode.remove();
 });
-

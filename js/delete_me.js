@@ -215,7 +215,7 @@ function deleteChecks(selectedValues) {
         removeButtons[i].addEventListener('click', function () {
             for (let j = 0; j < selectedValues.length; j++) {
                 let value = selectedValues[j];
-                deleteMovie(value)
+                deleteMovie(value);
 
             }
         });

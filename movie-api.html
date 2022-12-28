@@ -13,7 +13,7 @@
 
 </head>
 
-
+<!--NAVBAR-->
 <div>
     <nav class="navbar navbar-dark bg-dark fixed-top mb-3">
         <div class="container-fluid">
@@ -64,8 +64,8 @@
         </div>
     </nav>
 </div>
-
-
+<!--NAVBAR END-->
+<!--MODAL-->
 <div id="modal-cart" class="modal">
     <div class="modal-content">
         <div class="d-flex justify-content-between align-items-center">
@@ -112,7 +112,7 @@
         <button type="button" class="btn btn-primary btn-lg" id="uploadMovie">Add Content</button>
 
 
-        <a href="#" class="modal-close">&times;</a>
+        <a href="#" class="modal-close" id="close-1">&times;</a>
     </div>
 </div>
 
@@ -125,7 +125,7 @@
         <label>Year: <input class='mb-2' type="number" id='edit-year' placeholder="YYYY" min="1900" max="2023" id='edit-year'></label>
         <label></label>Comment: <textarea class='mb-2' id='edit-comment'cols="30" rows="10"
                                           placeholder="Leave a comment here"></textarea>
-        <button type="button" class="btn btn-primary btn-lg" id="update-button">Update Content</button>
+        <button type="button" href='#' class="btn btn-primary btn-lg" id="update-button">Update Content</button>
         <a href="#" class="modal-close">&times;</a>
     </div>
 </div>
