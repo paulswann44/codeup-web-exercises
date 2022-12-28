@@ -244,31 +244,33 @@ const putMovie = (editDetails) => {
         });
 };
 
+
+
 let editButton = document.getElementById('update-button');
 editButton.addEventListener('click', (event) => {
     event.preventDefault();
-    let movieId = selectedValues;
+    let selectedMovieId = selectedValues;
     let title = document.getElementById('edit-title').value;
     let year = document.getElementById('edit-year').value;
     let comment = document.getElementById('edit-comment').value;
 
-    if (year >= 1900 && year <= 2023 && year % 1 === 0 && title !== null || undefined) {
-        let editDetails = [title, year, movieId, comment];
+    if (selectedMovieId == null) {
+        alert('Selects a movie to modify');
+    } else if (title == null || title === "") {
+        alert('Add a movie title');
+    } else if (year < 1900 || year > 2023 || year % 1 !== 0) {
+        alert('Invalid year! Please enter a whole number between 1900 and 2023.');
+    } else {
+        let editDetails = [title, year, selectedMovieId, comment];
         let stringPromise = putMovie(editDetails);
+
         event.target.parentNode.remove();
 
         alert('Successfully updated movie!');
-        //window allows it to reload from the server rather than cache
         location.reload();
-    } else if(selectedValues === null || undefined){
-        alert('Selects a movie to modify');
-    }else if(title === null || undefined){
-        alert('Add a movie title');
-    } else{
-        alert('Invalid year! Please enter a whole number between 1900 and 2023.');
-
     }
 });
+
 
 
 
