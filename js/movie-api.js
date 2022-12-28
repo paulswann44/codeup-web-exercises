@@ -1,5 +1,4 @@
 const movieKey = MOVIE_API;
-let hideLoading = $('.lds-ring').hide();
 
 
 //URL for the glitch database
@@ -14,7 +13,14 @@ function loadingAnimation() {
     document.querySelector('.lds-ring').style.display = 'block';
     setTimeout(function () {
         document.querySelector('.lds-ring').style.display = 'none';
-    }, 500);
+    }, 5000);
+}
+//prevents loading icon before query of movies database
+let hideLoading = $('.lds-ring').hide();
+
+//works best to pass a function rather than a variable within the fetch request
+function removeLoadingAnimation() {
+    $('.lds-ring').hide();
 }
 
 const searchButton = document.getElementById("submit-btn");
@@ -25,9 +31,11 @@ searchButton.addEventListener("click", function (event) {
     getMovies(search);
 });
 
-//Get request to the omdb API
+
+
+
 const getMovies = search => {
-    loadingAnimation()
+    loadingAnimation();
     fetch(`https://www.omdbapi.com?apikey=${movieKey}&s=${search}`)
         .then(response => response.json())
         .then(function (data) {
@@ -35,13 +43,19 @@ const getMovies = search => {
             let movie = data.Search;
             let appendMovies = append(movie);
             $('#append-movies').html(appendMovies);
+            // Remove the loading animation
+            removeLoadingAnimation();
 
         })
         .catch((error) => {
             loadingAnimation();
             console.log(error);
+            removeLoadingAnimation();
         })
 }
+
+
+
 
 //Appends into a card when information if fetched
 const append = data => {
@@ -55,8 +69,6 @@ const append = data => {
                          <h5 class="justify-content-center d-flex"> ${Title} - <p class="year">${Year}</p></h5>
                                     <button type="button" class="btn btn-outline-primary " id="addToCart" onclick="postMovie('${Title}','${Year}','${Poster}')">Add Movie</button>
             </div></div>`
-
-
     }
     return html
 }
@@ -79,7 +91,7 @@ function uploadMovie() {
 }
 
 
-let uploadMovies = document.getElementById('uploadMovie');
+const uploadMovies = document.getElementById('uploadMovie');
 uploadMovies.addEventListener('click', uploadMovie);
 
 
@@ -129,7 +141,6 @@ const deleteMovie = id => {
             alert(`Error deleting your movie: ${error.message}`);
             console.log(error.message);
         })
-
 }
 
 //Stored values the selected values
@@ -203,7 +214,6 @@ function deleteChecks(selectedValues) {
                 let value = selectedValues[j];
                 // This line calls the deleteMovie function and passes in the 'value' variable as an argument
                 deleteMovie(value)
-
             }
         });
     }
@@ -240,7 +250,6 @@ const putMovie = (editDetails) => {
 };
 
 
-
 let editButton = document.getElementById('update-button');
 editButton.addEventListener('click', event => {
     event.preventDefault();
@@ -259,9 +268,8 @@ editButton.addEventListener('click', event => {
         for (let i = 0; i < selectedMovieIds.length; i++) {
             let movieId = selectedMovieIds[i];
             let editDetails = [title, year, movieId, comment];
-            let stringPromise = putMovie(editDetails);
+            const stringPromise = putMovie(editDetails);
         }
-
         event.target.parentNode.remove();
         alert('Successfully updated movies!');
         location.reload();
