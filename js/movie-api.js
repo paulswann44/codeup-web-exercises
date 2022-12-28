@@ -64,23 +64,18 @@ const append = data => {
 function uploadMovie() {
     let movieTitle = document.getElementById('title').value;
     let movieYear = document.getElementById('year').value;
-    let moviePoster = '<img src="../img/default-movie.png" alt="default">'
+    let moviePoster = '<img src="../img/default-movie.png" alt="default">';
 
-    if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
-
+    if (movieTitle === "" || movieTitle == null) {
+        alert("Please enter a movie title.");
+    } else if (isNaN(movieYear) || movieYear % 1 !== 0 || movieYear < 1900 || movieYear > 2023) {
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-
-        // const moviePost =[movieTitle, movieYear, moviePoster]
-        // postMovie(moviePost)
-        postMovie(movieTitle, movieYear, moviePoster)
+        postMovie(movieTitle, movieYear, moviePoster);
         this.parentNode.remove();
         alert('Thank you for your submission!');
-        //window allows it to reload from the server rather than cache
         window.location.reload();
     }
-    console.log(`${movieTitle}`)
-    console.log(`${movieYear}`)
 }
 
 
@@ -166,7 +161,7 @@ const createCartElements = cart => {
         let item = cart[i];
         itemCart += `<div class="card cart">`
         itemCart += `<div class="d-flex justify-content-between">`
-        itemCart += ` <img src='${item.poster}' class='imageCard' alt='image'>`
+        itemCart += `<img src='${item.poster}' class='imageCard' alt='image'>`
         itemCart += `<p class="d-flex align-self-center m-0">${item.title}</p>`
         itemCart += `<input type="checkbox" name="name" value="${item.id}" id="check">`
         itemCart += `</div>`
@@ -185,10 +180,10 @@ const createCartElements = cart => {
                 selectedValues.push(event.target.value);
             } else {
                 // If it is not checked, it finds the index of the value in the selectedValues array and removes it using the splice() method.
-                // The splice() method removes elements from an array and returns them as a new array.  It removes 15 elements starting from index 1.
+                // The splice() method removes elements from an array and returns them as a new array.
                 let index = selectedValues.indexOf(event.target.value);
                 if (index > -1) {
-                    selectedValues.splice(1, 15);
+                    selectedValues.splice(index, 1);
                 }
             }
         });
@@ -247,26 +242,28 @@ const putMovie = (editDetails) => {
 
 
 let editButton = document.getElementById('update-button');
-editButton.addEventListener('click', (event) => {
+editButton.addEventListener('click', event => {
     event.preventDefault();
-    let selectedMovieId = selectedValues;
+    let selectedMovieIds = selectedValues;
     let title = document.getElementById('edit-title').value;
     let year = document.getElementById('edit-year').value;
     let comment = document.getElementById('edit-comment').value;
 
-    if (selectedMovieId == null) {
+    if (selectedMovieIds == null) {
         alert('Selects a movie to modify');
     } else if (title == null || title === "") {
         alert('Add a movie title');
     } else if (year < 1900 || year > 2023 || year % 1 !== 0) {
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
     } else {
-        let editDetails = [title, year, selectedMovieId, comment];
-        let stringPromise = putMovie(editDetails);
+        for (let i = 0; i < selectedMovieIds.length; i++) {
+            let movieId = selectedMovieIds[i];
+            let editDetails = [title, year, movieId, comment];
+            let stringPromise = putMovie(editDetails);
+        }
 
         event.target.parentNode.remove();
-
-        alert('Successfully updated movie!');
+        alert('Successfully updated movies!');
         location.reload();
     }
 });
