@@ -76,6 +76,7 @@ function uploadMovie() {
         postMovie(movieTitle, movieYear, moviePoster)
         this.parentNode.remove();
         alert('Thank you for your submission!');
+        //window allows it to reload from the server rather than cache
         window.location.reload();
     }
     console.log(`${movieTitle}`)
@@ -215,7 +216,7 @@ function deleteChecks(selectedValues) {
 
 deleteChecks(selectedValues);
 
-
+//function does a put request
 const putMovie = (editDetails) => {
     const movieObj = {
         title: editDetails[0],
@@ -251,17 +252,28 @@ editButton.addEventListener('click', (event) => {
     let year = document.getElementById('edit-year').value;
     let comment = document.getElementById('edit-comment').value;
 
-    if (year >= 1900 && year <= 2023 && year % 1 === 0) {
+    if (year >= 1900 && year <= 2023 && year % 1 === 0 && title !== null || undefined) {
         let editDetails = [title, year, movieId, comment];
         let stringPromise = putMovie(editDetails);
         event.target.parentNode.remove();
 
         alert('Successfully updated movie!');
-        window.location.reload();
-    } else {
+        //window allows it to reload from the server rather than cache
+        location.reload();
+    } else if(selectedValues === null || undefined){
+        alert('Selects a movie to modify');
+    }else if(title === null || undefined){
+        alert('Add a movie title');
+    } else{
         alert('Invalid year! Please enter a whole number between 1900 and 2023.');
+
     }
 });
+
+
+
+
+
 
 
 

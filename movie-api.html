@@ -95,8 +95,8 @@
     <div class="modal-content">
         <h1 class="d-flex justify-content-center">Add a Movie</h1>
         <p>For Independent Content Creators: </p>
-        <input type="text" class="new-movie mb-2" id="title" placeholder="Title">
-        <input type="number" id='year' placeholder="YYYY" min="1900" max="2023">
+        <input type="text" class="new-movie mb-2" id="title" placeholder="Title*" required>
+        <input type="number" id='year' placeholder="YYYY*" min="1900" max="2023" required>
         <label for="upload">Choose your movie file:</label>
 
         <!--disabled because not trying to really upload a file on a front-end project-->
@@ -116,8 +116,8 @@
 <div id="modal-edit" class="modal">
     <div class="modal-content">
         <h1 class='d-flex justify-content-center'>Update Information</h1>
-        <label>Title: <input class='mb-2' type="type" id='edit-title' placeholder="Enter Movie Title:"></label>
-        <label>Year: <input class='mb-2' type="number" id='edit-year' placeholder="YYYY" min="1900" max="2023" id='edit-year'></label>
+        <label>Title: <input class='mb-2' type="type" id='edit-title' placeholder="Enter Movie Title*:" required></label>
+        <label>Year: <input class='mb-2' type="number" id='edit-year' placeholder="YYYY*" min="1900" max="2023" id='edit-year' required></label>
         <label></label>Comment: <textarea class='mb-2' id='edit-comment'cols="30" rows="10"
                                           placeholder="Leave a comment here"></textarea>
         <button type="button" href='#' class="btn btn-primary btn-lg" id="update-button">Update Content</button>
